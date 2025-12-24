@@ -480,7 +480,4 @@ function SolanaLogo({ large = false }: { large?: boolean; }) {
   );
 }
 
-function UsbIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/usb-memory-stick.png" className="w-[22px] h-[22px] opacity-40" />; }
-function FileIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/file.png" className="w-[22px] h-[22px] opacity-40" />; }
-function DownloadIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/download.png" className="w-[22px] h-[22px] opacity-40" />; }
-function EyeIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-[22px] h-[22px] opacity-40" />; }
+
