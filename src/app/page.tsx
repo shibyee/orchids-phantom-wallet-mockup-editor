@@ -278,10 +278,10 @@ export default function PhantomMock() {
               </div>
 
               <div className="grid grid-cols-4 gap-[10px] mb-8">
-                <ActionButton icon={<QrCode size={22} />} label="Receive" />
-                <ActionButton icon={<Send size={21} className="-rotate-45" />} label="Send" />
-                <ActionButton icon={<ArrowRightLeft size={22} />} label="Swap" />
-                <ActionButton icon={<DollarSign size={23} />} label="Buy" />
+                <ActionButton icon={<QrCode size={24} />} label="Receive" />
+                <ActionButton icon={<Send size={24} />} label="Send" />
+                <ActionButton icon={<ArrowRightLeft size={24} />} label="Swap" />
+                <ActionButton icon={<DollarSign size={24} />} label="Buy" />
               </div>
 
               <div className="relative mb-4 flex items-center gap-4 rounded-[20px] bg-[#212121] p-[16px] overflow-hidden group">
