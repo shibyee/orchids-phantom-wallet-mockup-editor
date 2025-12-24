@@ -15,15 +15,12 @@ import {
   ArrowUpRight,
   RefreshCw,
   LayoutGrid,
-  Clock,
-  History,
-  Layout,
   Zap,
   Home
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const STORAGE_KEY = "phantom_mock_data_v4";
+const STORAGE_KEY = "phantom_mock_data_v5";
 
 const DEFAULTS = {
   chain: "Solana",
@@ -31,7 +28,7 @@ const DEFAULTS = {
   addr: "7fXB…Hin7",
   dots: 86,
   homeName: "111",
-  bal: "1.22",
+  bal: "1.21",
   delta: "-0.0282",
   pct: "-2.27",
   banner: "Meet Phantom Terminal, your new home for desktop trading",
@@ -150,10 +147,10 @@ export default function PhantomMock() {
                 </button>
               </div>
 
-              {/* Editor Toggle - Even more subtle pencil on the first screen */}
+              {/* Editor Toggle - Hidden pencil on the first screen */}
               <button 
                 onClick={() => setShowEditor(true)}
-                className="absolute top-0 right-0 p-2 opacity-[0.015] hover:opacity-10 transition-opacity z-50"
+                className="absolute top-0 right-0 p-4 opacity-0 hover:opacity-[0.02] transition-opacity z-50"
                 title="Edit Data"
               >
                 <Pencil size={12} />
@@ -308,10 +305,10 @@ export default function PhantomMock() {
               </div>
 
               {/* Banner */}
-              <div className="relative mb-4 flex items-start gap-4 rounded-[20px] bg-[#2a2a2a] p-[18px] border border-white/[0.02] overflow-hidden group">
+              <div className="relative mb-5 flex items-start gap-4 rounded-[22px] bg-[#2a2a2a] p-[16px] border border-white/[0.03] overflow-hidden group">
                 <TerminalIcon />
                 <div className="pr-6 pt-0.5">
-                  <div className="text-[14.5px] font-bold leading-[1.3] text-white/95">
+                  <div className="text-[15px] font-bold leading-[1.25] text-white/95">
                     {data.banner}
                   </div>
                 </div>
@@ -321,20 +318,20 @@ export default function PhantomMock() {
               </div>
 
               {/* Token List */}
-              <div className="flex items-center justify-between rounded-[20px] bg-[#2a2a2a] p-[18px] border border-white/[0.02] mb-5 group cursor-pointer hover:bg-[#2f2f2f] transition-colors">
+              <div className="flex items-center justify-between rounded-[22px] bg-[#2a2a2a] p-[16px] border border-white/[0.03] mb-5 group cursor-pointer hover:bg-[#2f2f2f] transition-colors">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black overflow-hidden">
+                  <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black overflow-hidden border border-white/[0.05]">
                     <SolanaLogo large />
                   </div>
                   <div className="flex flex-col gap-0.5">
-                    <span className="text-[16px] font-bold text-white leading-none">{data.tokName}</span>
+                    <span className="text-[17px] font-bold text-white leading-none">{data.tokName}</span>
                     <span className="text-[14px] font-medium text-white/40 leading-none">{data.tokAmt}</span>
                   </div>
                 </div>
-                <div className="flex flex-col items-end gap-0.5">
-                  <span className="text-[16px] font-bold text-white leading-none">${data.tokUsd}</span>
+                <div className="flex flex-col items-end gap-1">
+                  <span className="text-[17px] font-bold text-white leading-none">${data.tokUsd}</span>
                   <span className={`text-[14px] font-medium leading-none ${data.tokChg.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}`}>
-                    {data.tokChg.startsWith('-') ? '' : '+'}${Math.abs(parseFloat(data.tokChg)).toFixed(2)}
+                    {data.tokChg.startsWith('-') ? '' : '+'}${data.tokChg.replace('-', '')}
                   </span>
                 </div>
               </div>
@@ -490,48 +487,27 @@ function Field({ label, value, onChange, type = "text", multiline = false }: { l
 
 function TerminalIcon() {
   return (
-    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#1a1a1a] border border-white/[0.06]">
-      <div className="relative w-7 h-5 border-[1.5px] border-white/20 rounded-[4px] p-0.5 flex flex-col gap-[2px]">
-        <div className="flex gap-[2px]">
-          <div className="w-[8px] h-[3px] rounded-full bg-[#27c241]" />
-          <div className="w-[12px] h-[3px] rounded-full bg-[#eb5757]" />
-        </div>
-        <div className="flex gap-[2px]">
-          <div className="w-[14px] h-[3px] rounded-full bg-[#27c241]" />
-          <div className="w-[6px] h-[3px] rounded-full bg-[#eb5757]" />
-        </div>
-        <div className="flex gap-[2px]">
-          <div className="w-[6px] h-[3px] rounded-full bg-[#27c241]" />
-          <div className="w-[14px] h-[3px] rounded-full bg-[#eb5757]" />
-        </div>
-        {/* Monitor Stand */}
-        <div className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-3 h-[4px] bg-white/20 rounded-b-sm" />
+    <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-[12px] bg-[#1a1a1a] border border-white/[0.08] relative">
+      <div className="relative w-8 h-[22px] border-[1.5px] border-white/40 rounded-[4px] p-0.5 flex flex-col gap-[2px] bg-[#1a1a1a]">
+        <img 
+          src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766560261432.png?width=8000&height=8000&resize=contain" 
+          className="w-full h-full object-contain px-0.5"
+          alt="Terminal Bars"
+        />
       </div>
+      {/* Monitor Stand */}
+      <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-3.5 h-[5px] bg-white/40 rounded-b-[2px]" />
     </div>
   );
 }
 
 function SolanaLogo({ large = false }: { large?: boolean }) {
   return (
-    <svg width={large ? "30" : "24"} height={large ? "30" : "24"} viewBox="0 0 397 311" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-64.6 23.8c-2.4 2.4-5.7 3.8-9.2 3.8H4.6c-5.8 0-8.7-7-4.6-11.1l64.6-23.8z" fill="url(#sol_g1)"/>
-      <path d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-64.6 23.8c-2.4 2.4-5.7 3.8-9.2 3.8H4.6c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z" fill="url(#sol_g2)"/>
-      <path d="M331.4 120.9c-2.4-2.4-5.7-3.8-9.2-3.8H4.8c-5.8 0-8.7 7-4.6 11.1l64.6 23.8c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-64.6-23.8z" fill="url(#sol_g3)"/>
-      <defs>
-        <linearGradient id="sol_g1" x1="338" y1="234.1" x2="25.2" y2="273.7" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#00FFA3"/>
-          <stop offset="1" stopColor="#DC1FFF"/>
-        </linearGradient>
-        <linearGradient id="sol_g2" x1="338" y1="0" x2="25.2" y2="39.6" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#00FFA3"/>
-          <stop offset="1" stopColor="#DC1FFF"/>
-        </linearGradient>
-        <linearGradient id="sol_g3" x1="25.2" y1="120.9" x2="338" y2="160.5" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#00FFA3"/>
-          <stop offset="1" stopColor="#DC1FFF"/>
-        </linearGradient>
-      </defs>
-    </svg>
+    <img 
+      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766560271503.png?width=8000&height=8000&resize=contain" 
+      className={large ? "w-[30px] h-[30px]" : "w-[24px] h-[24px]"}
+      alt="Solana"
+    />
   );
 }
 
