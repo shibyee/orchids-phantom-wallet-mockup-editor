@@ -29,13 +29,13 @@ const DEFAULTS = {
   dots: 86,
   homeName: "111",
   bal: "1.22",
-  delta: "0.0274",
-  pct: "2.21",
+  delta: "-0.0274",
+  pct: "-2.21",
   banner: "Meet Phantom Terminal, your new home for desktop trading",
   tokName: "Solana",
   tokAmt: "0.01 SOL",
   tokUsd: "1.22",
-  tokChg: "0.03",
+  tokChg: "-0.03",
   manage: "Manage token list",
   badgeCount: "3"
 };
