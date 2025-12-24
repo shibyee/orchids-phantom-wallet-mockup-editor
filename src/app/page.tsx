@@ -305,32 +305,34 @@ export default function PhantomMock() {
               </div>
 
               {/* Banner */}
-              <div className="relative mb-5 flex items-start gap-4 rounded-[22px] bg-[#2a2a2a] p-[16px] border border-white/[0.03] overflow-hidden group">
+              <div className="relative mb-5 flex items-center gap-4 rounded-[22px] bg-[#2a2a2a] p-[18px] border border-white/[0.04] overflow-hidden group">
                 <TerminalIcon />
-                <div className="pr-6 pt-0.5">
-                  <div className="text-[15px] font-bold leading-[1.25] text-white/95">
+                <div className="flex-1 pr-6">
+                  <div className="text-[16px] font-bold leading-[1.2] text-white/95 tracking-tight">
                     {data.banner}
                   </div>
                 </div>
-                <button className="absolute right-4 top-4 text-white/30 hover:text-white transition-colors">
-                  <X size={14} strokeWidth={2.5} />
+                <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors">
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white/5 hover:bg-white/10">
+                    <X size={12} strokeWidth={3} />
+                  </div>
                 </button>
               </div>
 
               {/* Token List */}
-              <div className="flex items-center justify-between rounded-[22px] bg-[#2a2a2a] p-[16px] border border-white/[0.03] mb-5 group cursor-pointer hover:bg-[#2f2f2f] transition-colors">
+              <div className="flex items-center justify-between rounded-[22px] bg-[#2a2a2a] p-[18px] border border-white/[0.04] mb-5 group cursor-pointer hover:bg-[#2f2f2f] transition-colors">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black overflow-hidden border border-white/[0.05]">
+                  <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-black overflow-hidden shadow-inner">
                     <SolanaLogo large />
                   </div>
                   <div className="flex flex-col gap-0.5">
-                    <span className="text-[17px] font-bold text-white leading-none">{data.tokName}</span>
-                    <span className="text-[14px] font-medium text-white/40 leading-none">{data.tokAmt}</span>
+                    <span className="text-[18px] font-bold text-white leading-tight">{data.tokName}</span>
+                    <span className="text-[15px] font-medium text-white/40 leading-tight tracking-tight">{data.tokAmt}</span>
                   </div>
                 </div>
-                <div className="flex flex-col items-end gap-1">
-                  <span className="text-[17px] font-bold text-white leading-none">${data.tokUsd}</span>
-                  <span className={`text-[14px] font-medium leading-none ${data.tokChg.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}`}>
+                <div className="flex flex-col items-end gap-0.5">
+                  <span className="text-[18px] font-bold text-white leading-tight">${data.tokUsd}</span>
+                  <span className="text-[15px] font-medium leading-tight text-[#eb5757] tracking-tight">
                     {data.tokChg.startsWith('-') ? '' : '+'}${data.tokChg.replace('-', '')}
                   </span>
                 </div>
