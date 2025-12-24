@@ -485,10 +485,10 @@ function TerminalIcon() {
 
 function SolanaLogo({ large = false }: {large?: boolean;}) {
   return (
-    <div className={large ? "scale-[0.65]" : "scale-100"}>
+    <div className={large ? "scale-100" : "scale-100"}>
       <img
-        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766562778191.png?width=8000&height=8000&resize=contain"
-        className={large ? "w-[30px] h-[30px]" : "w-[24px] h-[24px]"}
+        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/api.phantom-1766562867239.avif"
+        className={large ? "w-full h-full object-cover" : "w-[24px] h-[24px]"}
         alt="Solana" />
 
     </div>);
