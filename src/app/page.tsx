@@ -83,11 +83,11 @@ export default function PhantomMock() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a] p-4 font-sans text-white">
-      <div className="relative h-[660px] w-[375px] overflow-hidden rounded-[24px] bg-[#101010] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.03]">
+      <div className="relative h-[660px] w-[375px] overflow-hidden rounded-[24px] bg-[#1F1F1F] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.03]">
         
         {/* Top Bar for Sub-screens */}
         {screen !== "s3" &&
-        <header className="flex h-14 items-center justify-between px-4 bg-[#101010]">
+        <header className="flex h-14 items-center justify-between px-4 bg-[#1F1F1F]">
             <button
             onClick={() => {
               if (screen === "s2") setScreen("s1");else
@@ -97,7 +97,7 @@ export default function PhantomMock() {
 
               {screen === "s1" ? <X size={22} strokeWidth={2.5} /> : <ChevronLeft size={24} strokeWidth={2.5} />}
             </button>
-            <div className="text-[16px] font-bold tracking-tight">
+            <div className="text-[17px] font-extrabold tracking-tight">
               {screen === "s1" && "Add / Connect Wallet"}
               {screen === "s2" && "Import Private Key"}
             </div>
@@ -145,7 +145,7 @@ export default function PhantomMock() {
               <div className="absolute bottom-6 left-4 right-4">
                   <button
                 onClick={() => setScreen("s3")}
-                className="h-[52px] w-full rounded-[14px] bg-[#212121] font-bold text-white/90 hover:bg-[#2a2a2a] transition-colors text-[15px]">
+                className="h-[52px] w-full rounded-[14px] bg-[#2A2A2A] font-extrabold text-white hover:bg-[#323232] transition-colors text-[16px]">
 
                     Close
                   </button>
@@ -170,18 +170,18 @@ export default function PhantomMock() {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col items-center px-4 pt-6">
 
-              <div className="relative mb-8 h-24 w-24 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[32px] font-bold">
+              <div className="relative mb-8 h-24 w-24 rounded-full bg-[#2A2A2A] flex items-center justify-center text-[34px] font-black">
                 P
-                <div className="absolute bottom-0 right-0 rounded-full bg-[#3a3a3a] p-1.5 border-[3px] border-[#1a1a1a]">
+                <div className="absolute bottom-0 right-0 rounded-full bg-[#3a3a3a] p-1.5 border-[3px] border-[#1F1F1F]">
                   <Pencil size={12} className="text-white/40" />
                 </div>
               </div>
 
               <div className="w-full space-y-3">
-                <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
+                <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2A2A2A] px-4 border border-white/[0.02]">
                   <div className="flex items-center gap-3">
                     <SolanaLogo />
-                    <span className="font-bold text-[15px]">{data.chain}</span>
+                    <span className="font-extrabold text-[16px]">{data.chain}</span>
                   </div>
                   <ChevronDown size={18} className="text-white/40" />
                 </div>
@@ -192,7 +192,7 @@ export default function PhantomMock() {
                   placeholder="Name"
                   value={inputName}
                   onChange={(e) => setInputName(e.target.value)}
-                  className="w-full h-[56px] rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02] text-[15px] font-bold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30" />
+                  className="w-full h-[56px] rounded-[12px] bg-[#2A2A2A] px-4 border border-white/[0.02] text-[16px] font-extrabold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30" />
 
                 </div>
 
@@ -201,7 +201,7 @@ export default function PhantomMock() {
                   placeholder="Private key"
                   value={inputKey}
                   onChange={(e) => setInputKey(e.target.value)}
-                  className="w-full h-[110px] rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-[15px] font-medium text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30 resize-none" />
+                  className="w-full h-[110px] rounded-[12px] bg-[#2A2A2A] px-4 py-4 border border-white/[0.02] text-[16px] font-bold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30 resize-none" />
 
                 </div>
 
@@ -213,8 +213,8 @@ export default function PhantomMock() {
                   exit={{ opacity: 0, y: -10 }}
                   className="flex items-center justify-between px-1 pt-2">
 
-                      <span className="text-[13px] font-bold text-white">Account Address</span>
-                      <span className="text-[13px] font-medium text-white/40">{data.addr}</span>
+                      <span className="text-[14px] font-extrabold text-white">Account Address</span>
+                      <span className="text-[14px] font-semibold text-white/40">{data.addr}</span>
                     </motion.div>
                 }
                 </AnimatePresence>
@@ -223,10 +223,10 @@ export default function PhantomMock() {
               <div className="absolute bottom-6 left-4 right-4">
                 <button
                 onClick={() => setScreen("s3")}
-                className={`h-[52px] w-full rounded-[14px] font-bold text-[15px] transition-all duration-300 ${
+                className={`h-[52px] w-full rounded-[14px] font-extrabold text-[16px] transition-all duration-300 ${
                 inputKey.length > 0 ?
                 "bg-[#ab9ff2] text-[#121212] shadow-[0_0_20px_rgba(171,159,242,0.2)]" :
-                "bg-[#2a2a2a] text-white/20"}`
+                "bg-[#2A2A2A] text-white/20"}`
                 }>
 
                   Import
@@ -247,81 +247,81 @@ export default function PhantomMock() {
                 <div className="flex items-center gap-3">
                   <button
                   onClick={() => setScreen("s1")}
-                  className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#2a2a2a] text-[14px] font-bold text-white hover:bg-[#323232] transition-colors">
+                  className="flex h-[36px] w-[36px] items-center justify-center rounded-full bg-[#2A2A2A] text-[15px] font-black text-white hover:bg-[#323232] transition-colors">
 
                     {data.badgeCount}
                   </button>
                   <div className="flex items-center gap-1.5 group cursor-pointer">
-                    <span className="font-bold text-[16px] tracking-tight">{data.homeName}</span>
+                    <span className="font-extrabold text-[17px] tracking-tight">{data.homeName}</span>
                     <ChevronDown size={14} className="text-white/20 group-hover:text-white/50 transition-colors" />
                   </div>
                 </div>
                 <div className="flex items-center gap-4.5">
-                  <Search size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
-                  <LayoutGrid size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
+                  <Search size={22} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
+                  <LayoutGrid size={22} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
                   {/* Pencil removed from here */}
                 </div>
               </div>
 
               <div className="flex flex-col items-center mb-9">
-                <div className="text-[44px] font-bold leading-none mb-3 tracking-tight">
+                <div className="text-[48px] font-black leading-none mb-3 tracking-tighter">
                   ${data.bal}
                 </div>
-                <div className="flex items-center gap-2 text-[15px] font-bold">
+                <div className="flex items-center gap-2 text-[16px] font-black">
                   <span className={data.delta.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}>
                     {data.delta.startsWith('-') ? '' : '+'}${data.delta}
                   </span>
-                  <span className={`px-2 py-0.5 rounded-[6px] text-[13px] ${data.pct.startsWith('-') ? 'bg-[#eb5757]/10 text-[#eb5757]' : 'bg-[#27c241]/10 text-[#27c241]'}`}>
+                  <span className={`px-2 py-0.5 rounded-[6px] text-[13.5px] font-black ${data.pct.startsWith('-') ? 'bg-[#eb5757]/10 text-[#eb5757]' : 'bg-[#27c241]/10 text-[#27c241]'}`}>
                     {data.pct.startsWith('-') ? '' : '+'}{data.pct}%
                   </span>
                 </div>
               </div>
 
               <div className="grid grid-cols-4 gap-[10px] mb-8">
-                <ActionButton icon={<QrCode size={24} />} label="Receive" />
-                <ActionButton icon={<Send size={24} />} label="Send" />
-                <ActionButton icon={<ArrowRightLeft size={24} />} label="Swap" />
-                <ActionButton icon={<DollarSign size={24} />} label="Buy" />
+                <ActionButton icon={<QrCode size={26} />} label="Receive" />
+                <ActionButton icon={<Send size={26} />} label="Send" />
+                <ActionButton icon={<ArrowRightLeft size={26} />} label="Swap" />
+                <ActionButton icon={<DollarSign size={26} />} label="Buy" />
               </div>
 
-              <div className="relative mb-4 flex items-center gap-4 rounded-[20px] bg-[#212121] p-[16px] overflow-hidden group">
+              <div className="relative mb-4 flex items-center gap-4 rounded-[20px] bg-[#2A2A2A] p-[16px] overflow-hidden group">
                 <TerminalIcon />
                 <div className="flex-1 pr-6">
-                  <div className="text-[15.5px] font-bold leading-[1.2] text-white tracking-tight">
+                  <div className="text-[16px] font-extrabold leading-[1.25] text-white tracking-tight">
                     {data.banner}
                   </div>
                 </div>
                 <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors">
-                  <X size={14} strokeWidth={2.5} />
+                  <X size={14} strokeWidth={3} />
                 </button>
               </div>
 
               {/* Token List */}
-              <div className="flex items-center justify-between rounded-[20px] bg-[#212121] p-[16px] mb-4 group cursor-pointer hover:bg-[#282828] transition-colors">
+              <div className="flex items-center justify-between rounded-[20px] bg-[#2A2A2A] p-[16px] mb-4 group cursor-pointer hover:bg-[#323232] transition-colors">
                 <div className="flex items-center gap-4">
                   <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black overflow-hidden">
                     <SolanaLogo large />
                   </div>
                   <div className="flex flex-col gap-0.5">
-                    <span className="text-[17px] font-bold text-white leading-tight">{data.tokName}</span>
-                    <span className="text-[14px] font-medium text-white/40 leading-tight">{data.tokAmt}</span>
+                    <span className="text-[17px] font-extrabold text-white leading-tight">{data.tokName}</span>
+                    <span className="text-[14px] font-bold text-white/40 leading-tight">{data.tokAmt}</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-0.5">
-                  <span className="text-[17px] font-bold text-white leading-tight">${data.tokUsd}</span>
-                  <span className="text-[14px] font-medium leading-tight text-[#eb5757]">
+                  <span className="text-[17px] font-extrabold text-white leading-tight">${data.tokUsd}</span>
+                  <span className="text-[14px] font-bold leading-tight text-[#eb5757]">
                     {data.tokChg.startsWith('-') ? '' : '+'}${data.tokChg.replace('-', '')}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2.5 mb-20 opacity-30 hover:opacity-100 transition-opacity cursor-pointer group">
+              <div className="flex items-center justify-center gap-2.5 mb-20 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group">
                 <Settings2 size={16} className="text-white/80 group-hover:rotate-45 transition-transform" />
-                <span className="text-[14px] font-bold tracking-tight">{data.manage}</span>
+                <span className="text-[15px] font-extrabold tracking-tight">{data.manage}</span>
               </div>
 
               {/* Bottom Nav */}
-              <div className="absolute bottom-0 left-0 right-0 h-[72px] bg-[#1a1a1a] border-t border-white/[0.04] flex items-center justify-around px-2">
+              <div className="absolute bottom-0 left-0 right-0 h-[72px] bg-[#1F1F1F] border-t border-white/[0.04] flex items-center justify-around px-2">
                 <NavButton icon={<Home size={23} />} active />
                 <NavButton icon={<LayoutGrid size={23} />} />
                 <NavButton icon={<RefreshCw size={24} />} />
