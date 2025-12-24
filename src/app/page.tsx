@@ -181,7 +181,7 @@ export default function PhantomMock() {
                 <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2A2A2A] px-4 border border-white/[0.02]">
                   <div className="flex items-center gap-3">
                     <SolanaLogo />
-                    <span className="font-bold text-[16px]">{data.chain}</span>
+                    <span className="font-extrabold text-[16px]">{data.chain}</span>
                   </div>
                   <ChevronDown size={18} className="text-white/40" />
                 </div>
@@ -192,7 +192,7 @@ export default function PhantomMock() {
                   placeholder="Name"
                   value={inputName}
                   onChange={(e) => setInputName(e.target.value)}
-                  className="w-full h-[56px] rounded-[12px] bg-[#2A2A2A] px-4 border border-white/[0.02] text-[16px] font-bold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30" />
+                  className="w-full h-[56px] rounded-[12px] bg-[#2A2A2A] px-4 border border-white/[0.02] text-[16px] font-extrabold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30" />
 
                 </div>
 
@@ -213,8 +213,8 @@ export default function PhantomMock() {
                   exit={{ opacity: 0, y: -10 }}
                   className="flex items-center justify-between px-1 pt-2">
 
-                      <span className="text-[14px] font-bold text-white">Account Address</span>
-                      <span className="text-[14px] font-medium text-white/40">{data.addr}</span>
+                      <span className="text-[14px] font-extrabold text-white">Account Address</span>
+                      <span className="text-[14px] font-semibold text-white/40">{data.addr}</span>
                     </motion.div>
                 }
                 </AnimatePresence>
@@ -222,7 +222,7 @@ export default function PhantomMock() {
 
               <div className="absolute bottom-6 left-4 right-4">
                 <button
-                onClick={() => setScreen("s3")}
+nClick={() => setScreen("s3")}
                 className={`h-[52px] w-full rounded-[14px] font-bold text-[16px] transition-all duration-300 ${
                 inputKey.length > 0 ?
                 "bg-[#ab9ff2] text-[#121212] shadow-[0_0_20px_rgba(171,159,242,0.2)]" :
@@ -287,7 +287,7 @@ export default function PhantomMock() {
               <div className="relative mb-4 flex items-center gap-4 rounded-[20px] bg-[#2A2A2A] p-[16px] overflow-hidden group">
                 <TerminalIcon />
                 <div className="flex-1 pr-6">
-                  <div className="text-[16px] font-extrabold leading-[1.25] text-white tracking-tight">
+                  <div className="text-[16px] font-bold leading-[1.25] text-white tracking-tight">
                     {data.banner}
                   </div>
                 </div>
@@ -303,12 +303,12 @@ export default function PhantomMock() {
                     <SolanaLogo large />
                   </div>
                   <div className="flex flex-col gap-0.5">
-                    <span className="text-[17px] font-extrabold text-white leading-tight">{data.tokName}</span>
-                    <span className="text-[14px] font-bold text-white/40 leading-tight">{data.tokAmt}</span>
+                    <span className="text-[17px] font-bold text-white leading-tight tracking-tight">{data.tokName}</span>
+                    <span className="text-[14px] font-medium text-white/40 leading-tight">{data.tokAmt}</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-0.5">
-                  <span className="text-[17px] font-extrabold text-white leading-tight">${data.tokUsd}</span>
+                  <span className="text-[17px] font-bold text-white leading-tight tracking-tight">${data.tokUsd}</span>
                   <span className="text-[14px] font-bold leading-tight text-[#eb5757]">
                     {data.tokChg.startsWith('-') ? '' : '+'}${data.tokChg.replace('-', '')}
                   </span>
@@ -317,7 +317,7 @@ export default function PhantomMock() {
 
               <div className="flex items-center justify-center gap-2.5 mb-20 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group">
                 <Settings2 size={16} className="text-white/80 group-hover:rotate-45 transition-transform" />
-                <span className="text-[15px] font-extrabold tracking-tight">{data.manage}</span>
+                <span className="text-[15px] font-bold tracking-tight">{data.manage}</span>
               </div>
 
               {/* Bottom Nav */}
@@ -405,8 +405,8 @@ function OptionButton({ icon, title, sub, onClick }: {icon: React.ReactNode;titl
         {icon}
       </div>
       <div className="flex flex-col">
-        <span className="text-[16px] font-extrabold text-white leading-tight mb-0.5">{title}</span>
-        <span className="text-[13.5px] font-bold text-white/30 leading-tight">{sub}</span>
+        <span className="text-[16px] font-bold text-white leading-tight mb-0.5 tracking-tight">{title}</span>
+        <span className="text-[13.5px] font-medium text-white/30 leading-tight">{sub}</span>
       </div>
     </button>);
 
@@ -418,7 +418,7 @@ function ActionButton({ icon, label, className }: {icon: React.ReactNode;label: 
       <div className="flex items-center justify-center">
         {icon}
       </div>
-      <span className="text-[14px] font-extrabold text-white/40 tracking-tight group-hover:text-white/60 transition-colors">{label}</span>
+      <span className="text-[14px] font-bold text-white/40 tracking-tight group-hover:text-white/60 transition-colors">{label}</span>
     </div>);
 }
 
@@ -489,4 +489,4 @@ function SolanaLogo({ large = false }: {large?: boolean;}) {
 function UsbIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/usb-memory-stick.png" className="w-[22px] h-[22px] opacity-40" />;}
 function FileIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/file.png" className="w-[22px] h-[22px] opacity-40" />;}
 function DownloadIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/download.png" className="w-[22px] h-[22px] opacity-40" />;}
-function EyeIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-[22px] h-[22px] opacity-40" />;}
+function EyeIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-[22px] h-[22px] opacity-40" />;}>;}
