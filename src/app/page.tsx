@@ -82,7 +82,7 @@ export default function PhantomMock() {
   if (!isMounted) return null;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a] p-4 font-sans text-white">
+    <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a] p-4 font-phantom text-white">
       <div className="relative h-[660px] w-[375px] overflow-hidden rounded-[24px] bg-[#1F1F1F] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.03]">
         
         {/* Top Bar for Sub-screens */}
@@ -264,7 +264,7 @@ export default function PhantomMock() {
               </div>
 
               <div className="flex flex-col items-center mb-9">
-                <div className="text-[52px] font-extrabold leading-none mb-3 tracking-tighter">
+                <div className="text-[52px] font-medium leading-none mb-3 tracking-tighter">
                   ${data.bal}
                 </div>
                 <div className="flex items-center gap-2 text-[16px] font-bold tracking-tight">
