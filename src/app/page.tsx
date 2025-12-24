@@ -418,7 +418,7 @@ function ActionButton({ icon, label, className }: {icon: React.ReactNode;label: 
       <div className="flex items-center justify-center">
         {icon}
       </div>
-      <span className="text-[14px] font-bold text-[#ab9ff2] tracking-tight">{label}</span>
+      <span className="text-[14px] font-bold text-white/40 tracking-tight group-hover:text-white/60 transition-colors">{label}</span>
     </div>);
 }
 
