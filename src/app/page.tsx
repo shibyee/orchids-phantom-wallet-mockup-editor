@@ -195,28 +195,28 @@ export default function PhantomMock() {
                   />
                 </div>
 
-                <div className="relative flex flex-col gap-2">
-                  <div className="relative">
-                    <textarea 
-                      placeholder="Private key"
-                      value={inputKey}
-                      onChange={(e) => setInputKey(e.target.value)}
-                      className="w-full h-[110px] rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-[15px] font-medium text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30 resize-none"
-                    />
-                    {inputKey === "" && (
-                      <div className="absolute left-4 top-[70px] flex gap-1.5 opacity-60">
-                        {Array.from({ length: Number(data.dots) }).map((_, i) => (
-                          <div key={i} className="h-1.5 w-1.5 rounded-full bg-white" />
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                <div className="relative">
+                  <textarea 
+                    placeholder="Private key"
+                    value={inputKey}
+                    onChange={(e) => setInputKey(e.target.value)}
+                    className="w-full h-[110px] rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-[15px] font-medium text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30 resize-none"
+                  />
                 </div>
 
-                <div className="flex items-center justify-between px-1 pt-2">
-                  <span className="text-[13px] font-bold text-white/80">Account Address</span>
-                  <span className="text-[13px] font-medium text-white/40">{data.addr}</span>
-                </div>
+                <AnimatePresence>
+                  {inputKey.length > 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex items-center justify-between px-1 pt-2"
+                    >
+                      <span className="text-[13px] font-bold text-white">Account Address</span>
+                      <span className="text-[13px] font-medium text-white/40">{data.addr}</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <div className="absolute bottom-6 left-4 right-4">
