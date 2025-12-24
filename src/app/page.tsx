@@ -1,28 +1,29 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Plus, 
-  Cpu, 
-  Key, 
-  Download, 
-  Eye, 
   X, 
   ChevronLeft, 
   ChevronDown, 
   Search, 
   Maximize2, 
   Copy, 
-  ArrowDownLeft, 
-  ArrowUpRight, 
   RefreshCw, 
   DollarSign, 
   Settings2,
-  Pencil
+  Pencil,
+  QrCode,
+  Send,
+  Repeat2,
+  LayoutGrid,
+  Clock,
+  History,
+  Layout
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const STORAGE_KEY = "phantom_mock_data_v2";
+const STORAGE_KEY = "phantom_mock_data_v3";
 
 const DEFAULTS = {
   chain: "Solana",
@@ -30,14 +31,14 @@ const DEFAULTS = {
   addr: "7fXB…Hin7",
   dots: 86,
   homeName: "111",
-  bal: "1.24",
-  delta: "-0.0175",
-  pct: "-1.39",
+  bal: "1.22",
+  delta: "-0.0282",
+  pct: "-2.27",
   banner: "Meet Phantom Terminal, your new home for desktop trading",
   tokName: "Solana",
   tokAmt: "0.01 SOL",
-  tokUsd: "1.24",
-  tokChg: "-0.02",
+  tokUsd: "1.22",
+  tokChg: "-0.03",
   manage: "Manage token list",
   badgeCount: "3",
 };
@@ -46,7 +47,7 @@ type MockData = typeof DEFAULTS;
 
 export default function PhantomMock() {
   const [data, setData] = useState<MockData>(DEFAULTS);
-  const [screen, setScreen] = useState<"s1" | "s2" | "s3" | "s4">("s1");
+  const [screen, setScreen] = useState<"s1" | "s2" | "s3" | "s4">("s4");
   const [showEditor, setShowEditor] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -66,9 +67,6 @@ export default function PhantomMock() {
         e.preventDefault();
         setShowEditor(prev => !prev);
       }
-      if (e.key === "Escape") {
-        setShowEditor(false);
-      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -83,75 +81,82 @@ export default function PhantomMock() {
   if (!isMounted) return null;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-900 p-4 font-sans text-white">
-      <div className="relative h-[600px] w-[375px] overflow-hidden rounded-[32px] bg-[#121212] shadow-2xl border border-white/5">
+    <div className="flex min-h-screen items-center justify-center bg-[#0a0a0a] p-4 font-sans text-white">
+      <div className="relative h-[660px] w-[375px] overflow-hidden rounded-[24px] bg-[#1a1a1a] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.03]">
         
-        {/* Top Bar */}
-        <header className="flex h-14 items-center justify-between px-4">
-          <div className="flex w-10 items-center justify-start">
-            {screen !== "s4" && (
-              <button 
-                onClick={() => {
-                  if (screen === "s2" || screen === "s3") setScreen("s1");
-                  else if (screen === "s1") {} // Root
-                }}
-                className="rounded-full p-2 hover:bg-white/5"
-              >
-                {screen === "s1" ? <X size={20} /> : <ChevronLeft size={20} />}
-              </button>
-            )}
-          </div>
-          <div className="text-[15px] font-semibold">
-            {screen === "s1" && "Add Account"}
-            {(screen === "s2" || screen === "s3") && "Import Private Key"}
-          </div>
-          <div className="flex w-10 items-center justify-end">
-            <div className="w-5 h-5" />
-          </div>
-        </header>
+        {/* Top Bar for Sub-screens */}
+        {screen !== "s4" && (
+          <header className="flex h-14 items-center justify-between px-4 border-b border-white/[0.02]">
+            <button 
+              onClick={() => {
+                if (screen === "s2" || screen === "s3") setScreen("s1");
+                else if (screen === "s1") setScreen("s4");
+              }}
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              {screen === "s1" ? <X size={20} /> : <ChevronLeft size={20} />}
+            </button>
+            <div className="text-[15px] font-bold tracking-tight">
+              {screen === "s1" && "Add / Connect Wallet"}
+              {(screen === "s2" || screen === "s3") && "Import Private Key"}
+            </div>
+            <div className="w-5" />
+          </header>
+        )}
 
         <AnimatePresence mode="wait">
           {screen === "s1" && (
             <motion.main
               key="s1"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="flex flex-col gap-3 px-4 pt-2"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              className="flex flex-col gap-[10px] px-4 pt-5"
             >
               <OptionButton 
-                icon={<Plus size={22} className="text-white/70" />} 
+                icon={<Plus size={20} />} 
                 title="Create New Account" 
                 sub="Add a new multi-chain account"
                 onClick={() => setScreen("s2")}
               />
               <OptionButton 
-                icon={<Cpu size={22} className="text-white/70" />} 
+                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/usb-memory-stick.png" className="w-5 h-5 opacity-40" />} 
                 title="Connect Hardware Wallet" 
                 sub="Use your Ledger hardware wallet"
               />
               <OptionButton 
-                icon={<Key size={22} className="text-white/70" />} 
+                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/file.png" className="w-5 h-5 opacity-40" />} 
                 title="Import Recovery Phrase" 
                 sub="Import accounts from another wallet"
               />
               <OptionButton 
-                icon={<Download size={22} className="text-white/70" />} 
+                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/download.png" className="w-5 h-5 opacity-40" />} 
                 title="Import Private Key" 
                 sub="Import a single-chain account"
                 onClick={() => setScreen("s2")}
               />
               <OptionButton 
-                icon={<Eye size={22} className="text-white/70" />} 
+                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-5 h-5 opacity-40" />} 
                 title="Watch Address" 
                 sub="Track any public wallet address"
               />
 
               <div className="absolute bottom-6 left-4 right-4">
-                <button className="h-12 w-full rounded-2xl bg-[#1a1a1a] font-semibold text-white/90 hover:bg-[#252525] transition-colors">
+                <button 
+                  onClick={() => setScreen("s4")}
+                  className="h-[52px] w-full rounded-[14px] bg-[#2a2a2a] font-bold text-white/90 hover:bg-[#323232] transition-colors text-[15px]"
+                >
                   Close
                 </button>
               </div>
+
+              {/* Editor Toggle - Subtle pencil */}
+              <button 
+                onClick={() => setShowEditor(true)}
+                className="absolute top-1 right-1 p-2 opacity-[0.03] hover:opacity-20 transition-opacity"
+              >
+                <Pencil size={10} />
+              </button>
             </motion.main>
           )}
 
@@ -161,41 +166,38 @@ export default function PhantomMock() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="flex flex-col items-center px-4 pt-2"
+              className="flex flex-col items-center px-4 pt-6"
             >
-              <div className="relative mb-8 mt-4 h-24 w-24 rounded-full bg-[#1a1a1a] flex items-center justify-center text-3xl font-bold">
+              <div className="relative mb-10 h-24 w-24 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[32px] font-bold">
                 P
-                <div className="absolute bottom-0 right-0 rounded-full bg-[#252525] p-2 border-2 border-[#121212]">
-                  <Pencil size={12} className="text-white/50" />
+                <div className="absolute bottom-0 right-0 rounded-full bg-[#3a3a3a] p-1.5 border-[3px] border-[#1a1a1a]">
+                  <Pencil size={12} className="text-white/40" />
                 </div>
               </div>
 
               <div className="w-full space-y-3">
-                <div className="flex h-14 items-center justify-between rounded-xl bg-[#1a1a1a] px-4 border border-white/5">
+                <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-6 w-6 flex-col gap-[2px]">
-                      <div className="h-[2px] w-full bg-[#9945FF]" />
-                      <div className="h-[2px] w-full bg-[#14F195]" />
-                      <div className="h-[2px] w-full bg-[#9945FF]" />
-                    </div>
-                    <span className="font-medium">Solana</span>
+                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=025" className="w-6 h-6 rounded-full bg-white p-1" />
+                    <span className="font-bold text-[15px]">Solana</span>
                   </div>
-                  <ChevronDown size={18} className="text-white/30" />
+                  <ChevronDown size={18} className="text-white/40" />
                 </div>
 
-                <div className="flex h-14 flex-col justify-center rounded-xl bg-[#1a1a1a] px-4 border border-white/5">
-                  <div className="text-[11px] text-white/30 font-medium">Name</div>
+                <div className="flex h-[56px] items-center rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02] text-white/20 text-[15px] font-medium">
+                  Name
                 </div>
 
-                <div className="flex h-32 flex-col pt-3 rounded-xl bg-[#1a1a1a] px-4 border border-white/5">
-                  <div className="text-[11px] text-white/30 font-medium">Private key</div>
+                <div className="flex h-[110px] items-start rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-white/20 text-[15px] font-medium">
+                  Private key
                 </div>
+                <div className="text-[#eb5757] text-[13px] font-medium px-1">Private key is required</div>
               </div>
 
               <div className="absolute bottom-6 left-4 right-4">
                 <button 
                   onClick={() => setScreen("s3")}
-                  className="h-12 w-full rounded-2xl bg-[#1a1a1a] font-semibold text-white/30 transition-colors"
+                  className="h-[52px] w-full rounded-[14px] bg-[#2a2a2a] font-bold text-white/20 transition-colors text-[15px]"
                 >
                   Import
                 </button>
@@ -209,50 +211,46 @@ export default function PhantomMock() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="flex flex-col items-center px-4 pt-2"
+              className="flex flex-col items-center px-4 pt-6"
             >
-              <div className="relative mb-8 mt-4 h-24 w-24 rounded-full bg-[#1a1a1a] flex items-center justify-center text-3xl font-bold">
+              <div className="relative mb-10 h-24 w-24 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[32px] font-bold">
                 P
-                <div className="absolute bottom-0 right-0 rounded-full bg-[#252525] p-2 border-2 border-[#121212]">
-                  <Pencil size={12} className="text-white/50" />
+                <div className="absolute bottom-0 right-0 rounded-full bg-[#3a3a3a] p-1.5 border-[3px] border-[#1a1a1a]">
+                  <Pencil size={12} className="text-white/40" />
                 </div>
               </div>
 
               <div className="w-full space-y-3">
-                <div className="flex h-14 items-center justify-between rounded-xl bg-[#1a1a1a] px-4 border border-white/5">
+                <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-6 w-6 flex-col gap-[2px]">
-                      <div className="h-[2px] w-full bg-[#9945FF]" />
-                      <div className="h-[2px] w-full bg-[#14F195]" />
-                      <div className="h-[2px] w-full bg-[#9945FF]" />
-                    </div>
-                    <span className="font-medium">{data.chain}</span>
+                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=025" className="w-6 h-6 rounded-full bg-white p-1" />
+                    <span className="font-bold text-[15px]">{data.chain}</span>
                   </div>
-                  <ChevronDown size={18} className="text-white/30" />
+                  <ChevronDown size={18} className="text-white/40" />
                 </div>
 
-                <div className="flex h-14 items-center rounded-xl bg-[#1a1a1a] px-4 border border-white/5">
-                  <span className="font-medium">{data.name}</span>
+                <div className="flex h-[56px] items-center rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
+                  <span className="font-bold text-[15px]">{data.name}</span>
                 </div>
 
-                <div className="flex h-32 flex-col pt-4 rounded-xl bg-[#1a1a1a] px-4 border border-white/5">
+                <div className="flex h-[110px] items-start rounded-[12px] bg-[#2a2a2a] px-4 py-5 border border-white/[0.02]">
                   <div className="flex flex-wrap gap-1.5 opacity-60">
                     {Array.from({ length: Number(data.dots) }).map((_, i) => (
-                      <div key={i} className="h-1 w-1 rounded-full bg-white" />
+                      <div key={i} className="h-1.5 w-1.5 rounded-full bg-white" />
                     ))}
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between px-1 pt-1">
-                  <span className="text-[13px] font-bold text-white/90">Account Address</span>
-                  <span className="text-[13px] font-medium text-white/60">{data.addr}</span>
+                  <span className="text-[13px] font-bold text-white/80">Account Address</span>
+                  <span className="text-[13px] font-medium text-white/40">{data.addr}</span>
                 </div>
               </div>
 
               <div className="absolute bottom-6 left-4 right-4">
                 <button 
                   onClick={() => setScreen("s4")}
-                  className="h-12 w-full rounded-2xl bg-[#ab9ff2] font-bold text-[#121212] hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(171,159,242,0.3)]"
+                  className="h-[52px] w-full rounded-[14px] bg-[#ab9ff2] font-bold text-[#121212] hover:opacity-90 transition-opacity text-[15px] shadow-[0_0_20px_rgba(171,159,242,0.2)]"
                 >
                   Import
                 </button>
@@ -266,99 +264,108 @@ export default function PhantomMock() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col px-4 pt-2"
+              className="flex flex-col px-4 pt-3"
             >
-              <div className="flex items-center justify-between h-12 mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1a1a1a] text-[12px] font-bold text-white/50">
+              <div className="flex items-center justify-between h-12 mb-8">
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => setScreen("s1")}
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2a2a2a] text-[13px] font-bold text-white hover:bg-[#323232] transition-colors"
+                  >
                     {data.badgeCount}
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-bold text-[15px]">{data.homeName}</span>
-                    <Copy size={14} className="text-white/30 cursor-pointer" />
+                  </button>
+                  <div className="flex items-center gap-1.5 group cursor-pointer">
+                    <span className="font-bold text-[15px] tracking-tight">{data.homeName}</span>
+                    <Copy size={14} className="text-white/20 group-hover:text-white/50 transition-colors" />
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Search size={20} className="text-white/50 cursor-pointer" />
-                  <Maximize2 size={18} className="text-white/50 cursor-pointer" />
+                  <Search size={20} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
+                  <LayoutGrid size={20} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
                 </div>
               </div>
 
               <div className="flex flex-col items-center mb-8">
-                <div className="text-[42px] font-bold leading-none mb-3 tracking-tight">
+                <div className="text-[48px] font-bold leading-none mb-3 tracking-tight">
                   ${data.bal}
                 </div>
                 <div className="flex items-center gap-2 text-[15px] font-bold">
-                  <span className={data.delta.startsWith('-') ? 'text-[#ff6b6b]' : 'text-[#22c55e]'}>
+                  <span className={data.delta.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}>
                     {data.delta.startsWith('-') ? '' : '+'}${data.delta}
                   </span>
-                  <span className={`px-2 py-0.5 rounded-md text-[13px] ${data.pct.startsWith('-') ? 'bg-[#ff6b6b]/10 text-[#ff6b6b]' : 'bg-[#22c55e]/10 text-[#22c55e]'}`}>
+                  <span className={`px-2 py-0.5 rounded-[6px] text-[13px] ${data.pct.startsWith('-') ? 'bg-[#eb5757]/10 text-[#eb5757]' : 'bg-[#27c241]/10 text-[#27c241]'}`}>
                     {data.pct.startsWith('-') ? '' : '+'}{data.pct}%
                   </span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-2 mb-8">
-                <ActionButton icon={<Maximize2 size={20} className="rotate-45" />} label="Receive" />
-                <ActionButton icon={<ArrowUpRight size={22} />} label="Send" />
-                <ActionButton icon={<RefreshCw size={20} />} label="Swap" />
-                <ActionButton icon={<DollarSign size={20} />} label="Buy" />
+              <div className="grid grid-cols-4 gap-[8px] mb-8">
+                <ActionButton icon={<QrCode size={22} />} label="Receive" />
+                <ActionButton icon={<Send size={22} className="-rotate-12" />} label="Send" />
+                <ActionButton icon={<Repeat2 size={24} />} label="Swap" />
+                <ActionButton icon={<DollarSign size={22} />} label="Buy" />
               </div>
 
-              <div className="relative mb-6 flex items-start gap-3 rounded-[20px] bg-[#1a1a1a] p-4 border border-white/5 overflow-hidden group">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/5">
-                  <div className="grid grid-cols-2 gap-0.5 p-1 border-2 border-white/20 rounded">
-                    <div className="w-1.5 h-1 bg-[#14F195]" />
-                    <div className="w-1.5 h-1 bg-[#ab9ff2]" />
-                    <div className="w-1.5 h-1 bg-[#ff6b6b]" />
-                    <div className="w-1.5 h-1 bg-white/40" />
+              {/* Banner */}
+              <div className="relative mb-6 flex items-start gap-3.5 rounded-[18px] bg-[#2a2a2a] p-4 border border-white/[0.02] overflow-hidden group">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#1a1a1a] border border-white/[0.05]">
+                  <div className="flex flex-col gap-[2.5px] w-5 h-4 border border-white/20 rounded-[3px] p-0.5">
+                    <div className="flex gap-[2px]">
+                      <div className="w-[6px] h-[3px] rounded-full bg-[#27c241]" />
+                      <div className="w-[10px] h-[3px] rounded-full bg-[#eb5757]" />
+                    </div>
+                    <div className="flex gap-[2px]">
+                      <div className="w-[10px] h-[3px] rounded-full bg-[#27c241]" />
+                      <div className="w-[6px] h-[3px] rounded-full bg-[#eb5757]" />
+                    </div>
+                    <div className="flex gap-[2px]">
+                      <div className="w-[12px] h-[3px] rounded-full bg-[#27c241]" />
+                      <div className="w-[4px] h-[3px] rounded-full bg-[#eb5757]" />
+                    </div>
                   </div>
                 </div>
-                <div className="pr-6">
-                  <div className="text-[13px] font-bold leading-snug text-white/90">
+                <div className="pr-5">
+                  <div className="text-[14px] font-bold leading-snug text-white/90">
                     {data.banner}
                   </div>
                 </div>
-                <button className="absolute right-3 top-4 text-white/30 hover:text-white transition-colors">
-                  <X size={16} />
+                <button className="absolute right-3.5 top-4 text-white/30 hover:text-white transition-colors">
+                  <X size={15} />
                 </button>
               </div>
 
-              <div className="flex items-center justify-between rounded-2xl bg-[#1a1a1a] p-3.5 border border-white/5 mb-4 group cursor-pointer hover:bg-[#202020] transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black">
-                     <div className="flex h-6 w-6 flex-col gap-[2px]">
-                      <div className="h-[2px] w-full bg-[#9945FF]" />
-                      <div className="h-[2px] w-full bg-[#14F195]" />
-                      <div className="h-[2px] w-full bg-[#9945FF]" />
-                    </div>
+              {/* Token List */}
+              <div className="flex items-center justify-between rounded-[20px] bg-[#2a2a2a] p-4 border border-white/[0.02] mb-5 group cursor-pointer hover:bg-[#2f2f2f] transition-colors">
+                <div className="flex items-center gap-3.5">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black overflow-hidden border border-white/[0.05]">
+                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=025" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-[15px] font-bold text-white/90">{data.tokName}</span>
+                    <span className="text-[15px] font-bold text-white">{data.tokName}</span>
                     <span className="text-[13px] font-medium text-white/40">{data.tokAmt}</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-end">
-                  <span className="text-[15px] font-bold text-white/90">${data.tokUsd}</span>
-                  <span className={`text-[13px] font-medium ${data.tokChg.startsWith('-') ? 'text-[#ff6b6b]' : 'text-[#22c55e]'}`}>
+                  <span className="text-[15px] font-bold text-white">${data.tokUsd}</span>
+                  <span className={`text-[13px] font-medium ${data.tokChg.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}`}>
                     {data.tokChg.startsWith('-') ? '' : '+'}{data.tokChg}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2 mt-auto pb-4 opacity-40 hover:opacity-100 transition-opacity cursor-pointer">
-                <Settings2 size={16} />
-                <span className="text-[13px] font-bold">{data.manage}</span>
+              <div className="flex items-center justify-center gap-2.5 mb-20 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group">
+                <Settings2 size={16} className="text-white/80 group-hover:rotate-45 transition-transform" />
+                <span className="text-[14px] font-bold tracking-tight">{data.manage}</span>
               </div>
 
-              {/* Visible toggle for editor */}
-              <button 
-                onClick={() => setShowEditor(true)}
-                className="absolute bottom-4 right-4 h-8 w-8 rounded-full bg-white/5 flex items-center justify-center text-white/20 hover:text-white/50 hover:bg-white/10 transition-all"
-                title="Open Editor"
-              >
-                <Pencil size={14} />
-              </button>
+              {/* Bottom Nav */}
+              <div className="absolute bottom-0 left-0 right-0 h-[72px] bg-[#1a1a1a] border-t border-white/[0.03] flex items-center justify-around px-2">
+                <NavButton icon={<div className="p-1 rounded-[6px] bg-[#ab9ff2]/10"><img src="https://img.icons8.com/ios-filled/50/ab9ff2/home.png" className="w-6 h-6" /></div>} active />
+                <NavButton icon={<Layout size={22} />} />
+                <NavButton icon={<Repeat2 size={24} />} />
+                <NavButton icon={<Clock size={22} />} />
+                <NavButton icon={<Search size={22} />} />
+              </div>
             </motion.main>
           )}
         </AnimatePresence>
@@ -370,16 +377,16 @@ export default function PhantomMock() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-50 flex flex-col bg-black/95 backdrop-blur-sm p-6 overflow-y-auto scrollbar-hide"
+              className="absolute inset-0 z-[100] flex flex-col bg-[#0f0f0f]/98 backdrop-blur-md p-6 overflow-y-auto scrollbar-hide"
             >
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-8 pt-4">
                 <h2 className="text-xl font-bold text-[#ab9ff2]">Edit Mock Data</h2>
-                <button onClick={() => setShowEditor(false)} className="rounded-full bg-white/10 p-2">
+                <button onClick={() => setShowEditor(false)} className="rounded-full bg-white/5 p-2.5 hover:bg-white/10">
                   <X size={20} />
                 </button>
               </div>
 
-              <div className="space-y-6 pb-20">
+              <div className="space-y-8 pb-20">
                 <Section title="Screen: Import Private Key">
                   <Field label="Chain" value={data.chain} onChange={(v) => saveData({...data, chain: v})} />
                   <Field label="Name" value={data.name} onChange={(v) => saveData({...data, name: v})} />
@@ -401,26 +408,20 @@ export default function PhantomMock() {
                   <Field label="Manage Text" value={data.manage} onChange={(v) => saveData({...data, manage: v})} />
                 </Section>
 
-                <div className="flex gap-4">
+                <div className="flex gap-4 pt-4">
                   <button 
-                    onClick={() => {
-                      saveData(DEFAULTS);
-                    }}
-                    className="flex-1 h-12 rounded-xl bg-white/10 font-bold hover:bg-white/20 transition-colors"
+                    onClick={() => saveData(DEFAULTS)}
+                    className="flex-1 h-12 rounded-[14px] bg-white/5 font-bold hover:bg-white/10 transition-colors"
                   >
-                    Reset Defaults
+                    Reset
                   </button>
                   <button 
                     onClick={() => setShowEditor(false)}
-                    className="flex-1 h-12 rounded-xl bg-[#ab9ff2] text-black font-bold hover:opacity-90 transition-colors"
+                    className="flex-1 h-12 rounded-[14px] bg-[#ab9ff2] text-black font-bold hover:opacity-90 transition-all"
                   >
-                    Save & Close
+                    Done
                   </button>
                 </div>
-              </div>
-              
-              <div className="mt-auto pt-6 text-center text-white/30 text-[12px]">
-                Ctrl + Shift + E to toggle
               </div>
             </motion.div>
           )}
@@ -434,35 +435,43 @@ function OptionButton({ icon, title, sub, onClick }: { icon: React.ReactNode, ti
   return (
     <button 
       onClick={onClick}
-      className="flex items-center gap-4 rounded-3xl bg-[#1a1a1a] p-4 text-left transition-colors hover:bg-[#222] group active:scale-[0.98]"
+      className="flex items-center gap-4 rounded-[18px] bg-[#2a2a2a] p-4 text-left transition-colors hover:bg-[#323232] group active:scale-[0.98]"
     >
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 group-hover:bg-white/10">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/[0.03] group-hover:bg-white/[0.06] border border-white/[0.02]">
         {icon}
       </div>
       <div className="flex flex-col">
-        <span className="text-[15px] font-bold text-white/90 leading-tight">{title}</span>
-        <span className="text-[13px] font-medium text-white/40 leading-tight">{sub}</span>
+        <span className="text-[15px] font-bold text-white leading-tight mb-0.5">{title}</span>
+        <span className="text-[13px] font-medium text-white/30 leading-tight">{sub}</span>
       </div>
     </button>
   );
 }
 
-function ActionButton({ icon, label }: { icon: React.ReactNode, label: string }) {
+function ActionButton({ icon, label, className }: { icon: React.ReactNode, label: string, className?: string }) {
   return (
     <div className="flex flex-col items-center gap-2 group cursor-pointer active:scale-[0.95] transition-transform">
-      <div className="flex h-14 w-14 items-center justify-center rounded-[20px] bg-[#1a1a1a] text-[#ab9ff2] transition-colors group-hover:bg-[#252525]">
+      <div className={`flex h-[68px] w-full items-center justify-center rounded-[18px] bg-[#2a2a2a] text-[#ab9ff2] transition-colors group-hover:bg-[#323232] border border-white/[0.02] ${className}`}>
         {icon}
       </div>
-      <span className="text-[12px] font-bold text-white/40 transition-colors group-hover:text-white/80">{label}</span>
+      <span className="text-[13px] font-bold text-white/40 group-hover:text-white/60 transition-colors">{label}</span>
     </div>
+  );
+}
+
+function NavButton({ icon, active = false }: { icon: React.ReactNode, active?: boolean }) {
+  return (
+    <button className={`flex items-center justify-center w-12 h-12 rounded-full transition-colors ${active ? 'text-[#ab9ff2]' : 'text-white/30 hover:text-white/50'}`}>
+      {icon}
+    </button>
   );
 }
 
 function Section({ title, children }: { title: string, children: React.ReactNode }) {
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold text-white/40 uppercase tracking-widest">{title}</h3>
-      <div className="space-y-3">{children}</div>
+      <h3 className="text-[12px] font-bold text-white/30 uppercase tracking-[0.1em] ml-1">{title}</h3>
+      <div className="space-y-4">{children}</div>
     </div>
   );
 }
@@ -470,19 +479,19 @@ function Section({ title, children }: { title: string, children: React.ReactNode
 function Field({ label, value, onChange, type = "text", multiline = false }: { label: string, value: string, onChange: (v: string) => void, type?: string, multiline?: boolean }) {
   return (
     <div className="space-y-1.5">
-      <label className="text-[13px] font-medium text-white/60 ml-1">{label}</label>
+      <label className="text-[13px] font-bold text-white/50 ml-1">{label}</label>
       {multiline ? (
         <textarea 
           value={value} 
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-xl bg-white/5 border border-white/10 p-3 text-[14px] focus:outline-none focus:border-[#ab9ff2]/50 min-h-[80px] resize-none"
+          className="w-full rounded-[14px] bg-white/[0.04] border border-white/10 p-3.5 text-[15px] font-medium focus:outline-none focus:border-[#ab9ff2]/40 min-h-[100px] resize-none transition-colors"
         />
       ) : (
         <input 
           type={type}
           value={value} 
           onChange={(e) => onChange(e.target.value)}
-          className="w-full h-11 rounded-xl bg-white/5 border border-white/10 px-4 text-[14px] focus:outline-none focus:border-[#ab9ff2]/50"
+          className="w-full h-12 rounded-[14px] bg-white/[0.04] border border-white/10 px-4 text-[15px] font-medium focus:outline-none focus:border-[#ab9ff2]/40 transition-colors"
         />
       )}
     </div>
