@@ -44,7 +44,7 @@ type MockData = typeof DEFAULTS;
 
 export default function PhantomMock() {
   const [data, setData] = useState<MockData>(DEFAULTS);
-  const [screen, setScreen] = useState<"s1" | "s2" | "s3" | "s4">("s4");
+  const [screen, setScreen] = useState<"s1" | "s2" | "s3" | "s4">("s1");
   const [showEditor, setShowEditor] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
