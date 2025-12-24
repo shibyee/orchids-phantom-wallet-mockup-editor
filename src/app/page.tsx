@@ -344,7 +344,7 @@ export default function PhantomMock() {
               </div>
 
               {/* Bottom Nav */}
-              <div className="absolute bottom-0 left-0 right-0 h-[72px] bg-[#1a1a1a] border-t border-white/[0.04] flex items-center justify-around px-2">
+              <div className="absolute bottom-0 left-0 right-0 h-[72px] bg-[#101010] border-t border-white/[0.04] flex items-center justify-around px-2">
                 <NavButton icon={<Home size={23} />} active />
                 <NavButton icon={<LayoutGrid size={23} />} />
                 <NavButton icon={<RefreshCw size={24} />} />
@@ -422,7 +422,7 @@ function OptionButton({ icon, title, sub, onClick }: { icon: React.ReactNode, ti
   return (
     <button 
       onClick={onClick}
-      className="flex items-center gap-4 rounded-[20px] bg-[#2a2a2a] p-[18px] text-left transition-all hover:bg-[#323232] group active:scale-[0.98] border border-white/[0.01]"
+      className="flex items-center gap-4 rounded-[20px] bg-[#212121] p-[18px] text-left transition-all hover:bg-[#282828] group active:scale-[0.98]"
     >
       <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors">
         {icon}
@@ -438,7 +438,7 @@ function OptionButton({ icon, title, sub, onClick }: { icon: React.ReactNode, ti
 function ActionButton({ icon, label, className }: { icon: React.ReactNode, label: string, className?: string }) {
   return (
     <div className="flex flex-col items-center gap-2 group cursor-pointer active:scale-[0.95] transition-transform">
-      <div className={`flex h-[66px] w-full items-center justify-center rounded-[18px] bg-[#2a2a2a] text-[#ab9ff2] transition-colors group-hover:bg-[#323232] border border-white/[0.02] ${className}`}>
+      <div className={`flex h-[66px] w-full items-center justify-center rounded-[18px] bg-[#212121] text-[#ab9ff2] transition-colors group-hover:bg-[#282828] ${className}`}>
         {icon}
       </div>
       <span className="text-[13px] font-bold text-white/40 group-hover:text-white/60 transition-colors">{label}</span>
