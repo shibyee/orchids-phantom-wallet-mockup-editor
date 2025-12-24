@@ -280,6 +280,12 @@ export default function PhantomMock() {
                 <div className="flex items-center gap-4.5">
                   <Search size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
                   <LayoutGrid size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
+                  <button 
+                    onClick={() => setShowEditor(true)}
+                    className="text-white/10 hover:text-[#ab9ff2] transition-colors"
+                  >
+                    <Pencil size={18} />
+                  </button>
                 </div>
               </div>
 
