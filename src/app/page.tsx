@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { 
-  Plus, 
-  X, 
-  ChevronLeft, 
-  ChevronDown, 
-  Search, 
-  DollarSign, 
+import {
+  Plus,
+  X,
+  ChevronLeft,
+  ChevronDown,
+  Search,
+  DollarSign,
   Settings2,
   Pencil,
   QrCode,
@@ -16,8 +16,8 @@ import {
   RefreshCw,
   LayoutGrid,
   Zap,
-  Home
-} from "lucide-react";
+  Home } from
+"lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const STORAGE_KEY = "phantom_mock_data_v5";
@@ -37,7 +37,7 @@ const DEFAULTS = {
   tokUsd: "1.21",
   tokChg: "-0.03",
   manage: "Manage token list",
-  badgeCount: "3",
+  badgeCount: "3"
 };
 
 type MockData = typeof DEFAULTS;
@@ -47,7 +47,7 @@ export default function PhantomMock() {
   const [screen, setScreen] = useState<"s1" | "s2" | "s3">("s1");
   const [showEditor, setShowEditor] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  
+
   // Local state for interactive inputs on screen 2
   const [inputName, setInputName] = useState("");
   const [inputKey, setInputKey] = useState("");
@@ -66,7 +66,7 @@ export default function PhantomMock() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "e") {
         e.preventDefault();
-        setShowEditor(prev => !prev);
+        setShowEditor((prev) => !prev);
       }
     };
 
@@ -86,15 +86,15 @@ export default function PhantomMock() {
       <div className="relative h-[660px] w-[375px] overflow-hidden rounded-[24px] bg-[#101010] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.03]">
         
         {/* Top Bar for Sub-screens */}
-        {screen !== "s3" && (
-          <header className="flex h-14 items-center justify-between px-4 bg-[#101010]">
-            <button 
-              onClick={() => {
-                if (screen === "s2") setScreen("s1");
-                else if (screen === "s1") setScreen("s3");
-              }}
-              className="text-white/40 hover:text-white transition-colors"
-            >
+        {screen !== "s3" &&
+        <header className="flex h-14 items-center justify-between px-4 bg-[#101010]">
+            <button
+            onClick={() => {
+              if (screen === "s2") setScreen("s1");else
+              if (screen === "s1") setScreen("s3");
+            }}
+            className="text-white/40 hover:text-white transition-colors">
+
               {screen === "s1" ? <X size={22} strokeWidth={2.5} /> : <ChevronLeft size={24} strokeWidth={2.5} />}
             </button>
             <div className="text-[16px] font-bold tracking-tight">
@@ -103,73 +103,73 @@ export default function PhantomMock() {
             </div>
             <div className="w-5" />
           </header>
-        )}
+        }
 
         <AnimatePresence mode="wait">
-          {screen === "s1" && (
-            <motion.main
-              key="s1"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.02 }}
-              className="flex flex-col gap-[10px] px-4 pt-4"
-            >
-              <OptionButton 
-                icon={<Plus size={22} className="text-[#ab9ff2]" />} 
-                title="Create New Account" 
-                sub="Add a new multi-chain account"
-                onClick={() => setScreen("s2")}
-              />
-              <OptionButton 
-                icon={<UsbIcon />} 
-                title="Connect Hardware Wallet" 
-                sub="Use your Ledger hardware wallet"
-              />
-              <OptionButton 
-                icon={<FileIcon />} 
-                title="Import Recovery Phrase" 
-                sub="Import accounts from another wallet"
-              />
-              <OptionButton 
-                icon={<DownloadIcon />} 
-                title="Import Private Key" 
-                sub="Import a single-chain account"
-                onClick={() => setScreen("s2")}
-              />
-              <OptionButton 
-                icon={<EyeIcon />} 
-                title="Watch Address" 
-                sub="Track any public wallet address"
-              />
+          {screen === "s1" &&
+          <motion.main
+            key="s1"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            className="flex flex-col gap-[10px] px-4 pt-4">
+
+              <OptionButton
+              icon={<Plus size={22} className="text-[#ab9ff2]" />}
+              title="Create New Account"
+              sub="Add a new multi-chain account"
+              onClick={() => setScreen("s2")} />
+
+              <OptionButton
+              icon={<UsbIcon />}
+              title="Connect Hardware Wallet"
+              sub="Use your Ledger hardware wallet" />
+
+              <OptionButton
+              icon={<FileIcon />}
+              title="Import Recovery Phrase"
+              sub="Import accounts from another wallet" />
+
+              <OptionButton
+              icon={<DownloadIcon />}
+              title="Import Private Key"
+              sub="Import a single-chain account"
+              onClick={() => setScreen("s2")} />
+
+              <OptionButton
+              icon={<EyeIcon />}
+              title="Watch Address"
+              sub="Track any public wallet address" />
+
 
               <div className="absolute bottom-6 left-4 right-4">
-                  <button 
-                    onClick={() => setScreen("s3")}
-                    className="h-[52px] w-full rounded-[14px] bg-[#212121] font-bold text-white/90 hover:bg-[#2a2a2a] transition-colors text-[15px]"
-                  >
+                  <button
+                onClick={() => setScreen("s3")}
+                className="h-[52px] w-full rounded-[14px] bg-[#212121] font-bold text-white/90 hover:bg-[#2a2a2a] transition-colors text-[15px]">
+
                     Close
                   </button>
                 </div>
 
               {/* Editor Toggle - ONLY ON SCREEN 1 */}
-              <button 
-                onClick={() => setShowEditor(true)}
-                className="absolute top-2 right-2 p-3 text-white/10 hover:text-[#ab9ff2] transition-colors z-50"
-                title="Edit Data"
-              >
+              <button
+              onClick={() => setShowEditor(true)}
+              className="absolute top-2 right-2 p-3 text-white/10 hover:text-[#ab9ff2] transition-colors z-50"
+              title="Edit Data">
+
                 <Pencil size={16} />
               </button>
             </motion.main>
-          )}
+          }
 
-          {screen === "s2" && (
-            <motion.main
-              key="s2"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="flex flex-col items-center px-4 pt-6"
-            >
+          {screen === "s2" &&
+          <motion.main
+            key="s2"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="flex flex-col items-center px-4 pt-6">
+
               <div className="relative mb-8 h-24 w-24 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[32px] font-bold">
                 P
                 <div className="absolute bottom-0 right-0 rounded-full bg-[#3a3a3a] p-1.5 border-[3px] border-[#1a1a1a]">
@@ -187,68 +187,68 @@ export default function PhantomMock() {
                 </div>
 
                 <div className="relative">
-                  <input 
-                    type="text"
-                    placeholder="Name"
-                    value={inputName}
-                    onChange={(e) => setInputName(e.target.value)}
-                    className="w-full h-[56px] rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02] text-[15px] font-bold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30"
-                  />
+                  <input
+                  type="text"
+                  placeholder="Name"
+                  value={inputName}
+                  onChange={(e) => setInputName(e.target.value)}
+                  className="w-full h-[56px] rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02] text-[15px] font-bold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30" />
+
                 </div>
 
                 <div className="relative">
-                  <textarea 
-                    placeholder="Private key"
-                    value={inputKey}
-                    onChange={(e) => setInputKey(e.target.value)}
-                    className="w-full h-[110px] rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-[15px] font-medium text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30 resize-none"
-                  />
+                  <textarea
+                  placeholder="Private key"
+                  value={inputKey}
+                  onChange={(e) => setInputKey(e.target.value)}
+                  className="w-full h-[110px] rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-[15px] font-medium text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30 resize-none" />
+
                 </div>
 
                 <AnimatePresence>
-                  {inputKey.length > 0 && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center justify-between px-1 pt-2"
-                    >
+                  {inputKey.length > 0 &&
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex items-center justify-between px-1 pt-2">
+
                       <span className="text-[13px] font-bold text-white">Account Address</span>
                       <span className="text-[13px] font-medium text-white/40">{data.addr}</span>
                     </motion.div>
-                  )}
+                }
                 </AnimatePresence>
               </div>
 
               <div className="absolute bottom-6 left-4 right-4">
-                <button 
-                  onClick={() => setScreen("s3")}
-                  className={`h-[52px] w-full rounded-[14px] font-bold text-[15px] transition-all duration-300 ${
-                    inputKey.length > 0 
-                      ? "bg-[#ab9ff2] text-[#121212] shadow-[0_0_20px_rgba(171,159,242,0.2)]" 
-                      : "bg-[#2a2a2a] text-white/20"
-                  }`}
-                >
+                <button
+                onClick={() => setScreen("s3")}
+                className={`h-[52px] w-full rounded-[14px] font-bold text-[15px] transition-all duration-300 ${
+                inputKey.length > 0 ?
+                "bg-[#ab9ff2] text-[#121212] shadow-[0_0_20px_rgba(171,159,242,0.2)]" :
+                "bg-[#2a2a2a] text-white/20"}`
+                }>
+
                   Import
                 </button>
               </div>
             </motion.main>
-          )}
+          }
 
-          {screen === "s3" && (
-            <motion.main
-              key="s3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-col px-4 pt-3"
-            >
+          {screen === "s3" &&
+          <motion.main
+            key="s3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col px-4 pt-3">
+
               <div className="flex items-center justify-between h-12 mb-8">
                 <div className="flex items-center gap-3">
-                  <button 
-                    onClick={() => setScreen("s1")}
-                    className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#2a2a2a] text-[14px] font-bold text-white hover:bg-[#323232] transition-colors"
-                  >
+                  <button
+                  onClick={() => setScreen("s1")}
+                  className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#2a2a2a] text-[14px] font-bold text-white hover:bg-[#323232] transition-colors">
+
                     {data.badgeCount}
                   </button>
                   <div className="flex items-center gap-1.5 group cursor-pointer">
@@ -329,18 +329,18 @@ export default function PhantomMock() {
                 <NavButton icon={<Search size={23} />} />
               </div>
             </motion.main>
-          )}
+          }
         </AnimatePresence>
 
         {/* Hidden Editor */}
         <AnimatePresence>
-          {showEditor && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 z-[100] flex flex-col bg-[#0f0f0f]/98 backdrop-blur-xl p-6 overflow-y-auto scrollbar-hide"
-            >
+          {showEditor &&
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-[100] flex flex-col bg-[#0f0f0f]/98 backdrop-blur-xl p-6 overflow-y-auto scrollbar-hide">
+
               <div className="flex items-center justify-between mb-8 pt-4">
                 <h2 className="text-xl font-bold text-[#ab9ff2]">Edit Mock Data</h2>
                 <button onClick={() => setShowEditor(false)} className="rounded-full bg-white/5 p-2.5 hover:bg-white/10">
@@ -350,57 +350,57 @@ export default function PhantomMock() {
 
               <div className="space-y-8 pb-20">
                 <Section title="Screen: Import Private Key">
-                  <Field label="Chain" value={data.chain} onChange={(v) => saveData({...data, chain: v})} />
-                  <Field label="Name" value={data.name} onChange={(v) => saveData({...data, name: v})} />
-                  <Field label="Account Address" value={data.addr} onChange={(v) => saveData({...data, addr: v})} />
-                  <Field label="Private Key Dots" value={data.dots.toString()} type="number" onChange={(v) => saveData({...data, dots: parseInt(v) || 0})} />
+                  <Field label="Chain" value={data.chain} onChange={(v) => saveData({ ...data, chain: v })} />
+                  <Field label="Name" value={data.name} onChange={(v) => saveData({ ...data, name: v })} />
+                  <Field label="Account Address" value={data.addr} onChange={(v) => saveData({ ...data, addr: v })} />
+                  <Field label="Private Key Dots" value={data.dots.toString()} type="number" onChange={(v) => saveData({ ...data, dots: parseInt(v) || 0 })} />
                 </Section>
 
                 <Section title="Screen: Home">
-                  <Field label="Badge Count" value={data.badgeCount} onChange={(v) => saveData({...data, badgeCount: v})} />
-                  <Field label="Account Name" value={data.homeName} onChange={(v) => saveData({...data, homeName: v})} />
-                  <Field label="Balance ($)" value={data.bal} onChange={(v) => saveData({...data, bal: v})} />
-                  <Field label="Delta ($)" value={data.delta} onChange={(v) => saveData({...data, delta: v})} />
-                  <Field label="Percent (%)" value={data.pct} onChange={(v) => saveData({...data, pct: v})} />
-                  <Field label="Banner Text" value={data.banner} multiline onChange={(v) => saveData({...data, banner: v})} />
-                  <Field label="Token Name" value={data.tokName} onChange={(v) => saveData({...data, tokName: v})} />
-                  <Field label="Token Amount" value={data.tokAmt} onChange={(v) => saveData({...data, tokAmt: v})} />
-                  <Field label="Token USD ($)" value={data.tokUsd} onChange={(v) => saveData({...data, tokUsd: v})} />
-                  <Field label="Token Change ($)" value={data.tokChg} onChange={(v) => saveData({...data, tokChg: v})} />
-                  <Field label="Manage Text" value={data.manage} onChange={(v) => saveData({...data, manage: v})} />
+                  <Field label="Badge Count" value={data.badgeCount} onChange={(v) => saveData({ ...data, badgeCount: v })} />
+                  <Field label="Account Name" value={data.homeName} onChange={(v) => saveData({ ...data, homeName: v })} />
+                  <Field label="Balance ($)" value={data.bal} onChange={(v) => saveData({ ...data, bal: v })} />
+                  <Field label="Delta ($)" value={data.delta} onChange={(v) => saveData({ ...data, delta: v })} />
+                  <Field label="Percent (%)" value={data.pct} onChange={(v) => saveData({ ...data, pct: v })} />
+                  <Field label="Banner Text" value={data.banner} multiline onChange={(v) => saveData({ ...data, banner: v })} />
+                  <Field label="Token Name" value={data.tokName} onChange={(v) => saveData({ ...data, tokName: v })} />
+                  <Field label="Token Amount" value={data.tokAmt} onChange={(v) => saveData({ ...data, tokAmt: v })} />
+                  <Field label="Token USD ($)" value={data.tokUsd} onChange={(v) => saveData({ ...data, tokUsd: v })} />
+                  <Field label="Token Change ($)" value={data.tokChg} onChange={(v) => saveData({ ...data, tokChg: v })} />
+                  <Field label="Manage Text" value={data.manage} onChange={(v) => saveData({ ...data, manage: v })} />
                 </Section>
 
                 <div className="flex gap-4 pt-4">
-                  <button 
-                    onClick={() => saveData(DEFAULTS)}
-                    className="flex-1 h-12 rounded-[14px] bg-white/5 font-bold hover:bg-white/10 transition-colors"
-                  >
+                  <button
+                  onClick={() => saveData(DEFAULTS)}
+                  className="flex-1 h-12 rounded-[14px] bg-white/5 font-bold hover:bg-white/10 transition-colors">
+
                     Reset
                   </button>
-                  <button 
-                    onClick={() => setShowEditor(false)}
-                    className="flex-1 h-12 rounded-[14px] bg-[#ab9ff2] text-black font-bold hover:opacity-90 transition-all"
-                  >
+                  <button
+                  onClick={() => setShowEditor(false)}
+                  className="flex-1 h-12 rounded-[14px] bg-[#ab9ff2] text-black font-bold hover:opacity-90 transition-all">
+
                     Done
                   </button>
                 </div>
               </div>
             </motion.div>
-          )}
+          }
         </AnimatePresence>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // --- Custom Components ---
 
-function OptionButton({ icon, title, sub, onClick }: { icon: React.ReactNode, title: string, sub: string, onClick?: () => void }) {
+function OptionButton({ icon, title, sub, onClick }: {icon: React.ReactNode;title: string;sub: string;onClick?: () => void;}) {
   return (
-    <button 
+    <button
       onClick={onClick}
-      className="flex items-center gap-4 rounded-[20px] bg-[#2a2a2a] p-[18px] text-left transition-all hover:bg-[#323232] group active:scale-[0.98] border border-white/[0.01]"
-    >
+      className="flex items-center gap-4 rounded-[20px] bg-[#2a2a2a] p-[18px] text-left transition-all hover:bg-[#323232] group active:scale-[0.98] border border-white/[0.01]">
+
       <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors">
         {icon}
       </div>
@@ -408,58 +408,58 @@ function OptionButton({ icon, title, sub, onClick }: { icon: React.ReactNode, ti
         <span className="text-[15.5px] font-bold text-white leading-tight mb-0.5">{title}</span>
         <span className="text-[13px] font-medium text-white/30 leading-tight">{sub}</span>
       </div>
-    </button>
-  );
+    </button>);
+
 }
 
-function ActionButton({ icon, label, className }: { icon: React.ReactNode, label: string, className?: string }) {
+function ActionButton({ icon, label, className }: {icon: React.ReactNode;label: string;className?: string;}) {
   return (
-    <div className="flex flex-col items-center gap-2 group cursor-pointer active:scale-[0.95] transition-transform">
+    <div className="flex flex-col items-center gap-2 group cursor-pointer active:scale-[0.95] transition-transform !w-[78px] !h-full">
       <div className={`flex h-[66px] w-full items-center justify-center rounded-[20px] bg-[#222222] text-[#ab9ff2] transition-colors group-hover:bg-[#2a2a2a] border border-white/[0.02] ${className}`}>
         {icon}
       </div>
       <span className="text-[14px] font-bold text-[#f2e9e1]/60 group-hover:text-[#f2e9e1] transition-colors">{label}</span>
-    </div>
-  );
+    </div>);
+
 }
 
-function NavButton({ icon, active = false }: { icon: React.ReactNode, active?: boolean }) {
+function NavButton({ icon, active = false }: {icon: React.ReactNode;active?: boolean;}) {
   return (
     <button className={`flex items-center justify-center w-12 h-12 rounded-full transition-all ${active ? 'text-[#ab9ff2]' : 'text-white/20 hover:text-white/40'}`}>
       {icon}
-    </button>
-  );
+    </button>);
+
 }
 
-function Section({ title, children }: { title: string, children: React.ReactNode }) {
+function Section({ title, children }: {title: string;children: React.ReactNode;}) {
   return (
     <div className="space-y-4">
       <h3 className="text-[12px] font-bold text-white/30 uppercase tracking-[0.1em] ml-1">{title}</h3>
       <div className="space-y-4">{children}</div>
-    </div>
-  );
+    </div>);
+
 }
 
-function Field({ label, value, onChange, type = "text", multiline = false }: { label: string, value: string, onChange: (v: string) => void, type?: string, multiline?: boolean }) {
+function Field({ label, value, onChange, type = "text", multiline = false }: {label: string;value: string;onChange: (v: string) => void;type?: string;multiline?: boolean;}) {
   return (
     <div className="space-y-1.5">
       <label className="text-[13px] font-bold text-white/50 ml-1">{label}</label>
-      {multiline ? (
-        <textarea 
-          value={value} 
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-[14px] bg-white/[0.04] border border-white/10 p-3.5 text-[15px] font-medium focus:outline-none focus:border-[#ab9ff2]/40 min-h-[100px] resize-none transition-colors"
-        />
-      ) : (
-        <input 
-          type={type}
-          value={value} 
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full h-12 rounded-[14px] bg-white/[0.04] border border-white/10 px-4 text-[15px] font-medium focus:outline-none focus:border-[#ab9ff2]/40 transition-colors"
-        />
-      )}
-    </div>
-  );
+      {multiline ?
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-[14px] bg-white/[0.04] border border-white/10 p-3.5 text-[15px] font-medium focus:outline-none focus:border-[#ab9ff2]/40 min-h-[100px] resize-none transition-colors" /> :
+
+
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full h-12 rounded-[14px] bg-white/[0.04] border border-white/10 px-4 text-[15px] font-medium focus:outline-none focus:border-[#ab9ff2]/40 transition-colors" />
+
+      }
+    </div>);
+
 }
 
 // --- Icons ---
@@ -470,34 +470,34 @@ function TerminalIcon() {
       <div className="relative w-[38px] h-[28px] border-[1.5px] border-white rounded-[7px] flex flex-col items-center justify-center pt-[1px]">
         {/* Screen inside */}
         <div className="w-[28px] h-[16px] overflow-hidden rounded-[2px] bg-black/40 flex items-center justify-center">
-          <img 
-            src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766560261432.png?width=8000&height=8000&resize=contain" 
+          <img
+            src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766560261432.png?width=8000&height=8000&resize=contain"
             className="w-[120%] h-[120%] object-contain"
-            alt=""
-          />
+            alt="" />
+
         </div>
         {/* Stand components */}
         <div className="absolute -bottom-[6px] w-[14px] h-[1.5px] bg-white rounded-full" />
         <div className="absolute -bottom-[5px] w-[1.5px] h-[4px] bg-white" />
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
-function SolanaLogo({ large = false }: { large?: boolean }) {
+function SolanaLogo({ large = false }: {large?: boolean;}) {
   return (
     <div className={large ? "scale-[0.65]" : "scale-100"}>
-      <img 
-        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766560271503.png?width=8000&height=8000&resize=contain" 
+      <img
+        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766560271503.png?width=8000&height=8000&resize=contain"
         className={large ? "w-[30px] h-[30px]" : "w-[24px] h-[24px]"}
-        alt="Solana"
-      />
-    </div>
-  );
+        alt="Solana" />
+
+    </div>);
+
 }
 
 // Menu Icons
-function UsbIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/usb-memory-stick.png" className="w-[22px] h-[22px] opacity-40" />; }
-function FileIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/file.png" className="w-[22px] h-[22px] opacity-40" />; }
-function DownloadIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/download.png" className="w-[22px] h-[22px] opacity-40" />; }
-function EyeIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-[22px] h-[22px] opacity-40" />; }
+function UsbIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/usb-memory-stick.png" className="w-[22px] h-[22px] opacity-40" />;}
+function FileIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/file.png" className="w-[22px] h-[22px] opacity-40" />;}
+function DownloadIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/download.png" className="w-[22px] h-[22px] opacity-40" />;}
+function EyeIcon() {return <img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-[22px] h-[22px] opacity-40" />;}
