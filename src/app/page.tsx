@@ -399,14 +399,14 @@ function OptionButton({ icon, title, sub, onClick }: {icon: React.ReactNode;titl
   return (
     <button
       onClick={onClick}
-      className="flex items-center gap-4 rounded-[20px] bg-[#2a2a2a] p-[18px] text-left transition-all hover:bg-[#323232] group active:scale-[0.98] border border-white/[0.01]">
+      className="flex items-center gap-4 rounded-[20px] bg-[#2A2A2A] p-[18px] text-left transition-all hover:bg-[#323232] group active:scale-[0.98] border border-white/[0.01]">
 
       <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors">
         {icon}
       </div>
       <div className="flex flex-col">
-        <span className="text-[15.5px] font-bold text-white leading-tight mb-0.5">{title}</span>
-        <span className="text-[13px] font-medium text-white/30 leading-tight">{sub}</span>
+        <span className="text-[16px] font-extrabold text-white leading-tight mb-0.5">{title}</span>
+        <span className="text-[13.5px] font-bold text-white/30 leading-tight">{sub}</span>
       </div>
     </button>);
 
@@ -414,11 +414,11 @@ function OptionButton({ icon, title, sub, onClick }: {icon: React.ReactNode;titl
 
 function ActionButton({ icon, label, className }: {icon: React.ReactNode;label: string;className?: string;}) {
   return (
-    <div className={`flex flex-col items-center justify-center gap-1.5 h-[84px] w-full rounded-[18px] bg-[#212121] text-[#ab9ff2] cursor-pointer hover:bg-[#2a2a2a] active:scale-[0.96] transition-all border border-white/[0.02] group ${className}`}>
+    <div className={`flex flex-col items-center justify-center gap-1.5 h-[86px] w-full rounded-[18px] bg-[#2A2A2A] text-[#ab9ff2] cursor-pointer hover:bg-[#323232] active:scale-[0.96] transition-all border border-white/[0.02] group ${className}`}>
       <div className="flex items-center justify-center">
         {icon}
       </div>
-      <span className="text-[14px] font-bold text-white/40 tracking-tight group-hover:text-white/60 transition-colors">{label}</span>
+      <span className="text-[14px] font-extrabold text-white/40 tracking-tight group-hover:text-white/60 transition-colors">{label}</span>
     </div>);
 }
 
