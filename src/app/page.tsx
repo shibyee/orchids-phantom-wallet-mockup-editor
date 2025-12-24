@@ -301,9 +301,9 @@ export default function PhantomMock() {
               </div>
 
               <div className="grid grid-cols-4 gap-2 mb-8">
-                <ActionButton icon={<Maximize2 size={20} className="rotate-45" />} label="Receive" />
-                <ActionButton icon={<ArrowUpRight size={22} />} label="Send" />
-                <ActionButton icon={<RefreshCw size={20} />} label="Swap" />
+                <ActionButton icon={<QrCode size={20} />} label="Receive" />
+                <ActionButton icon={<Send size={20} className="-rotate-12" />} label="Send" />
+                <ActionButton icon={<Repeat2 size={22} />} label="Swap" />
                 <ActionButton icon={<DollarSign size={20} />} label="Buy" />
               </div>
 
