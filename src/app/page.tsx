@@ -7,7 +7,6 @@ import {
   ChevronLeft, 
   ChevronDown, 
   Search, 
-  Copy, 
   DollarSign, 
   Settings2,
   Pencil,
@@ -44,9 +43,13 @@ type MockData = typeof DEFAULTS;
 
 export default function PhantomMock() {
   const [data, setData] = useState<MockData>(DEFAULTS);
-  const [screen, setScreen] = useState<"s1" | "s2" | "s3" | "s4">("s1");
+  const [screen, setScreen] = useState<"s1" | "s2" | "s3">("s1");
   const [showEditor, setShowEditor] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  
+  // Local state for interactive inputs on screen 2
+  const [inputName, setInputName] = useState("");
+  const [inputKey, setInputKey] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
@@ -82,12 +85,12 @@ export default function PhantomMock() {
       <div className="relative h-[660px] w-[375px] overflow-hidden rounded-[24px] bg-[#101010] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/[0.03]">
         
         {/* Top Bar for Sub-screens */}
-        {screen !== "s4" && (
+        {screen !== "s3" && (
           <header className="flex h-14 items-center justify-between px-4 bg-[#101010]">
             <button 
               onClick={() => {
-                if (screen === "s2" || screen === "s3") setScreen("s1");
-                else if (screen === "s1") setScreen("s4");
+                if (screen === "s2") setScreen("s1");
+                else if (screen === "s1") setScreen("s3");
               }}
               className="text-white/40 hover:text-white transition-colors"
             >
@@ -95,7 +98,7 @@ export default function PhantomMock() {
             </button>
             <div className="text-[16px] font-bold tracking-tight">
               {screen === "s1" && "Add / Connect Wallet"}
-              {(screen === "s2" || screen === "s3") && "Import Private Key"}
+              {screen === "s2" && "Import Private Key"}
             </div>
             <div className="w-5" />
           </header>
@@ -140,14 +143,14 @@ export default function PhantomMock() {
 
               <div className="absolute bottom-6 left-4 right-4">
                   <button 
-                    onClick={() => setScreen("s4")}
+                    onClick={() => setScreen("s3")}
                     className="h-[52px] w-full rounded-[14px] bg-[#212121] font-bold text-white/90 hover:bg-[#2a2a2a] transition-colors text-[15px]"
                   >
                     Close
                   </button>
                 </div>
 
-              {/* Editor Toggle */}
+              {/* Editor Toggle - ONLY ON SCREEN 1 */}
               <button 
                 onClick={() => setShowEditor(true)}
                 className="absolute top-2 right-2 p-3 text-white/10 hover:text-[#ab9ff2] transition-colors z-50"
@@ -166,52 +169,7 @@ export default function PhantomMock() {
               exit={{ opacity: 0, x: -20 }}
               className="flex flex-col items-center px-4 pt-6"
             >
-              <div className="relative mb-10 h-24 w-24 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[32px] font-bold">
-                P
-                <div className="absolute bottom-0 right-0 rounded-full bg-[#3a3a3a] p-1.5 border-[3px] border-[#1a1a1a]">
-                  <Pencil size={12} className="text-white/40" />
-                </div>
-              </div>
-
-              <div className="w-full space-y-3">
-                <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
-                  <div className="flex items-center gap-3">
-                    <SolanaLogo />
-                    <span className="font-bold text-[15px]">Solana</span>
-                  </div>
-                  <ChevronDown size={18} className="text-white/40" />
-                </div>
-
-                <div className="flex h-[56px] items-center rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02] text-white/20 text-[15px] font-medium">
-                  Name
-                </div>
-
-                <div className="flex h-[110px] items-start rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-white/20 text-[15px] font-medium">
-                  Private key
-                </div>
-                <div className="text-[#eb5757] text-[13px] font-medium px-1">Private key is required</div>
-              </div>
-
-              <div className="absolute bottom-6 left-4 right-4">
-                <button 
-                  onClick={() => setScreen("s3")}
-                  className="h-[52px] w-full rounded-[14px] bg-[#2a2a2a] font-bold text-white/20 transition-colors text-[15px]"
-                >
-                  Import
-                </button>
-              </div>
-            </motion.main>
-          )}
-
-          {screen === "s3" && (
-            <motion.main
-              key="s3"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="flex flex-col items-center px-4 pt-6"
-            >
-              <div className="relative mb-10 h-24 w-24 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[32px] font-bold">
+              <div className="relative mb-8 h-24 w-24 rounded-full bg-[#2a2a2a] flex items-center justify-center text-[32px] font-bold">
                 P
                 <div className="absolute bottom-0 right-0 rounded-full bg-[#3a3a3a] p-1.5 border-[3px] border-[#1a1a1a]">
                   <Pencil size={12} className="text-white/40" />
@@ -227,19 +185,35 @@ export default function PhantomMock() {
                   <ChevronDown size={18} className="text-white/40" />
                 </div>
 
-                <div className="flex h-[56px] items-center rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
-                  <span className="font-bold text-[15px]">{data.name}</span>
+                <div className="relative">
+                  <input 
+                    type="text"
+                    placeholder="Name"
+                    value={inputName}
+                    onChange={(e) => setInputName(e.target.value)}
+                    className="w-full h-[56px] rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02] text-[15px] font-bold text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30"
+                  />
                 </div>
 
-                <div className="flex h-[110px] items-start rounded-[12px] bg-[#2a2a2a] px-4 py-5 border border-white/[0.02]">
-                  <div className="flex flex-wrap gap-1.5 opacity-60">
-                    {Array.from({ length: Number(data.dots) }).map((_, i) => (
-                      <div key={i} className="h-1.5 w-1.5 rounded-full bg-white" />
-                    ))}
+                <div className="relative flex flex-col gap-2">
+                  <div className="relative">
+                    <textarea 
+                      placeholder="Private key"
+                      value={inputKey}
+                      onChange={(e) => setInputKey(e.target.value)}
+                      className="w-full h-[110px] rounded-[12px] bg-[#2a2a2a] px-4 py-4 border border-white/[0.02] text-[15px] font-medium text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-[#ab9ff2]/30 resize-none"
+                    />
+                    {inputKey === "" && (
+                      <div className="absolute left-4 top-[70px] flex gap-1.5 opacity-60">
+                        {Array.from({ length: Number(data.dots) }).map((_, i) => (
+                          <div key={i} className="h-1.5 w-1.5 rounded-full bg-white" />
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between px-1 pt-1">
+                <div className="flex items-center justify-between px-1 pt-2">
                   <span className="text-[13px] font-bold text-white/80">Account Address</span>
                   <span className="text-[13px] font-medium text-white/40">{data.addr}</span>
                 </div>
@@ -247,8 +221,12 @@ export default function PhantomMock() {
 
               <div className="absolute bottom-6 left-4 right-4">
                 <button 
-                  onClick={() => setScreen("s4")}
-                  className="h-[52px] w-full rounded-[14px] bg-[#ab9ff2] font-bold text-[#121212] hover:opacity-90 transition-opacity text-[15px] shadow-[0_0_20px_rgba(171,159,242,0.2)]"
+                  onClick={() => setScreen("s3")}
+                  className={`h-[52px] w-full rounded-[14px] font-bold text-[15px] transition-all duration-300 ${
+                    inputKey.length > 0 
+                      ? "bg-[#ab9ff2] text-[#121212] shadow-[0_0_20px_rgba(171,159,242,0.2)]" 
+                      : "bg-[#2a2a2a] text-white/20"
+                  }`}
                 >
                   Import
                 </button>
@@ -256,9 +234,9 @@ export default function PhantomMock() {
             </motion.main>
           )}
 
-          {screen === "s4" && (
+          {screen === "s3" && (
             <motion.main
-              key="s4"
+              key="s3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -280,12 +258,7 @@ export default function PhantomMock() {
                 <div className="flex items-center gap-4.5">
                   <Search size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
                   <LayoutGrid size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
-                  <button 
-                    onClick={() => setShowEditor(true)}
-                    className="text-white/10 hover:text-[#ab9ff2] transition-colors"
-                  >
-                    <Pencil size={18} />
-                  </button>
+                  {/* Pencil removed from here */}
                 </div>
               </div>
 
