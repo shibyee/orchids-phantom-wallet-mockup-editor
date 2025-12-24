@@ -489,16 +489,18 @@ function Field({ label, value, onChange, type = "text", multiline = false }: { l
 
 function TerminalIcon() {
   return (
-    <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-[12px] bg-[#1a1a1a] border border-white/[0.08] relative">
-      <div className="relative w-8 h-[22px] border-[1.5px] border-white/40 rounded-[4px] p-0.5 flex flex-col gap-[2px] bg-[#1a1a1a]">
+    <div className="flex h-[46px] w-[54px] shrink-0 items-center justify-center relative scale-110">
+      {/* Monitor Frame */}
+      <div className="relative w-[44px] h-[30px] border-[2.5px] border-white/90 rounded-[6px] p-[1px] bg-[#1a1a1a] flex items-center justify-center overflow-hidden shadow-lg">
         <img 
           src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/file-1766560261432.png?width=8000&height=8000&resize=contain" 
-          className="w-full h-full object-contain px-0.5"
+          className="w-full h-full object-contain brightness-125"
           alt="Terminal Bars"
         />
       </div>
       {/* Monitor Stand */}
-      <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-3.5 h-[5px] bg-white/40 rounded-b-[2px]" />
+      <div className="absolute bottom-[4px] left-1/2 -translate-x-1/2 w-4 h-[3px] bg-white/90 rounded-b-[1px]" />
+      <div className="absolute bottom-[7px] left-1/2 -translate-x-1/2 w-[3px] h-[4px] bg-white/90" />
     </div>
   );
 }
