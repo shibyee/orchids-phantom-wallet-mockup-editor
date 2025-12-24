@@ -147,13 +147,13 @@ export default function PhantomMock() {
                   </button>
                 </div>
 
-              {/* Editor Toggle - Hidden pencil on the first screen */}
+              {/* Editor Toggle */}
               <button 
                 onClick={() => setShowEditor(true)}
-                className="absolute top-0 right-0 p-4 opacity-0 hover:opacity-[0.02] transition-opacity z-50"
+                className="absolute top-2 right-2 p-3 text-white/10 hover:text-[#ab9ff2] transition-colors z-50"
                 title="Edit Data"
               >
-                <Pencil size={12} />
+                <Pencil size={16} />
               </button>
             </motion.main>
           )}
