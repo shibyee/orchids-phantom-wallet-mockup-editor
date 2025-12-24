@@ -418,7 +418,7 @@ function ActionButton({ icon, label, className }: {icon: React.ReactNode;label: 
       <div className={`flex h-[66px] w-full items-center justify-center rounded-[20px] bg-[#222222] text-[#ab9ff2] transition-colors group-hover:bg-[#2a2a2a] border border-white/[0.02] ${className}`}>
         {icon}
       </div>
-      <span className="text-[14px] font-bold text-[#f2e9e1]/60 group-hover:text-[#f2e9e1] transition-colors">{label}</span>
+      <span className="text-[14px] font-bold text-[#ab9ff2]/60 group-hover:text-[#ab9ff2] transition-colors">{label}</span>
     </div>);
 
 }
