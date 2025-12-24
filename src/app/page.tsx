@@ -263,16 +263,15 @@ export default function PhantomMock() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center mb-9">
-                <div className="text-[64px] font-[900] leading-none mb-2 tracking-[-0.045em] flex items-baseline">
-                  <span className="text-[32px] font-bold mr-1 opacity-40 self-start mt-2">$</span>
-                  {data.bal}
+              <div className="flex flex-col items-center mb-8">
+                <div className="text-[54px] font-bold leading-none mb-1.5 tracking-tight">
+                  ${data.bal}
                 </div>
-                <div className="flex items-center gap-2 text-[16px] font-bold tracking-tight">
+                <div className="flex items-center gap-2 text-[16px] font-bold">
                   <span className={data.delta.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}>
                     {data.delta.startsWith('-') ? '' : '+'}${data.delta}
                   </span>
-                  <span className={`px-2 py-0.5 rounded-[6px] text-[13.5px] font-bold ${data.pct.startsWith('-') ? 'bg-[#eb5757]/10 text-[#eb5757]' : 'bg-[#27c241]/10 text-[#27c241]'}`}>
+                  <span className={`px-[7px] py-[3px] rounded-[6px] text-[14px] font-bold ${data.pct.startsWith('-') ? 'bg-[#eb5757]/15 text-[#eb5757]' : 'bg-[#27c241]/15 text-[#27c241]'}`}>
                     {data.pct.startsWith('-') ? '' : '+'}{data.pct}%
                   </span>
                 </div>
