@@ -350,6 +350,15 @@ export default function PhantomMock() {
                 <Settings2 size={16} />
                 <span className="text-[13px] font-bold">{data.manage}</span>
               </div>
+
+              {/* Visible toggle for editor */}
+              <button 
+                onClick={() => setShowEditor(true)}
+                className="absolute bottom-4 right-4 h-8 w-8 rounded-full bg-white/5 flex items-center justify-center text-white/20 hover:text-white/50 hover:bg-white/10 transition-all"
+                title="Open Editor"
+              >
+                <Pencil size={14} />
+              </button>
             </motion.main>
           )}
         </AnimatePresence>
