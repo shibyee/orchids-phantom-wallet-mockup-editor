@@ -470,7 +470,7 @@ function TerminalIcon() {
         {/* Screen inside */}
         <div className="w-[28px] h-[16px] overflow-hidden rounded-[2px] bg-black/40 flex items-center justify-center">
           <img
-            src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/b3054992e11f725109af4ccf86f775f9d3d505e0-40x40-1766563028380.png?width=8000&height=8000&resize=contain"
+            src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/b3054992e11f725109af4ccf86f775f9d3d505e0-40x40-1766563085670.png?width=8000&height=8000&resize=contain"
             className="w-[120%] h-[120%] object-contain"
             alt="" />
 
