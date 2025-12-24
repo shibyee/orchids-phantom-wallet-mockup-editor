@@ -260,7 +260,7 @@ export default function PhantomMock() {
               </div>
 
               <div className="flex flex-col items-center mb-8">
-                <div className="text-[50px] font-[500] leading-none mb-1 tracking-[-0.03em] font-blanka">
+                <div className="text-[44px] font-[700] leading-none mb-1 tracking-[-0.05em] font-phantom">
                   ${data.bal}
                 </div>
                 <div className="flex items-center gap-1.5 text-[15px] font-[700]">
