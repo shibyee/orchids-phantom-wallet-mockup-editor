@@ -1,10 +1,6 @@
-/* Updated: 2025-12-24T07:21:05.251Z */
-/* Updated: 2025-12-24T07:19:42.861Z */
-/* Updated: 2025-12-24T07:18:33.931Z */
-/* Updated: 2025-12-24T06:56:57.852Z */
+@import url('https://fonts.cdnfonts.com/css/phantom');
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.cdnfonts.com/css/phantom');
 
 @custom-variant dark (&:is(.dark *));
 
