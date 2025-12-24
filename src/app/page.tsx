@@ -264,8 +264,8 @@ export default function PhantomMock() {
               </div>
 
               <div className="flex flex-col items-center mb-9">
-                <div className="text-[54px] font-bold leading-none mb-3 tracking-[-0.035em] flex items-baseline">
-                  <span className="text-[52px] mr-0.5">$</span>
+                <div className="text-[64px] font-[900] leading-none mb-2 tracking-[-0.045em] flex items-baseline">
+                  <span className="text-[32px] font-bold mr-1 opacity-40 self-start mt-2">$</span>
                   {data.bal}
                 </div>
                 <div className="flex items-center gap-2 text-[16px] font-bold tracking-tight">
