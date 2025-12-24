@@ -414,11 +414,11 @@ function OptionButton({ icon, title, sub, onClick }: {icon: React.ReactNode;titl
 
 function ActionButton({ icon, label, className }: {icon: React.ReactNode;label: string;className?: string;}) {
   return (
-    <div className={`flex flex-col items-center justify-center gap-1.5 h-[86px] w-full rounded-[18px] bg-[#2A2A2A] text-[#ab9ff2] cursor-pointer hover:bg-[#323232] active:scale-[0.96] transition-all border border-white/[0.02] group ${className}`}>
+    <div className={`flex flex-col items-center justify-center gap-2 h-[80px] w-full rounded-[18px] bg-[#2A2A2A] text-[#ab9ff2]/80 cursor-pointer hover:bg-[#323232] active:scale-[0.96] transition-all border border-white/[0.01] group ${className}`}>
       <div className="flex items-center justify-center">
         {icon}
       </div>
-      <span className="text-[14px] font-bold text-white/40 tracking-tight group-hover:text-white/60 transition-colors">{label}</span>
+      <span className="text-[13px] font-[700] text-white/40 tracking-tight group-hover:text-white/60 transition-colors">{label}</span>
     </div>);
 }
 
