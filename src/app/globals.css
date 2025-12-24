@@ -116,8 +116,10 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    font-feature-settings: "cv05", "cv08", "cv09";
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    letter-spacing: -0.01em;
   }
 }
