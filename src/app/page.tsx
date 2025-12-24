@@ -16,7 +16,11 @@ import {
   RefreshCw,
   LayoutGrid,
   Zap,
-  Home
+  Home,
+  Usb,
+  FileText,
+  ArrowDownToLine,
+  Eye
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
