@@ -309,7 +309,7 @@ export default function PhantomMock() {
                 </div>
                 <div className="flex flex-col items-end gap-0.5">
                   <span className="text-[17px] font-bold text-white leading-tight">${data.tokUsd}</span>
-                  <span className="text-[14px] font-medium leading-tight text-white/40">
+                  <span className="text-[14px] font-medium leading-tight text-[#eb5757]">
                     {data.tokChg.startsWith('-') ? '' : '+'}${data.tokChg.replace('-', '')}
                   </span>
                 </div>
