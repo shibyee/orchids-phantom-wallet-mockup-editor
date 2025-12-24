@@ -264,8 +264,9 @@ export default function PhantomMock() {
               </div>
 
               <div className="flex flex-col items-center mb-9">
-                <div className="text-[52px] font-medium leading-none mb-3 tracking-tighter">
-                  ${data.bal}
+                <div className="text-[54px] font-bold leading-none mb-3 tracking-[-0.035em] flex items-baseline">
+                  <span className="text-[52px] mr-0.5">$</span>
+                  {data.bal}
                 </div>
                 <div className="flex items-center gap-2 text-[16px] font-bold tracking-tight">
                   <span className={data.delta.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}>
