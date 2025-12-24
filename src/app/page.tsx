@@ -7,23 +7,23 @@ import {
   ChevronLeft, 
   ChevronDown, 
   Search, 
-  Maximize2, 
   Copy, 
-  RefreshCw, 
   DollarSign, 
   Settings2,
   Pencil,
   QrCode,
-  Send,
-  Repeat2,
+  ArrowUpRight,
+  RefreshCw,
   LayoutGrid,
   Clock,
   History,
-  Layout
+  Layout,
+  Zap,
+  Home
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const STORAGE_KEY = "phantom_mock_data_v3";
+const STORAGE_KEY = "phantom_mock_data_v4";
 
 const DEFAULTS = {
   chain: "Solana",
@@ -37,7 +37,7 @@ const DEFAULTS = {
   banner: "Meet Phantom Terminal, your new home for desktop trading",
   tokName: "Solana",
   tokAmt: "0.01 SOL",
-  tokUsd: "1.22",
+  tokUsd: "1.21",
   tokChg: "-0.03",
   manage: "Manage token list",
   badgeCount: "3",
@@ -86,7 +86,7 @@ export default function PhantomMock() {
         
         {/* Top Bar for Sub-screens */}
         {screen !== "s4" && (
-          <header className="flex h-14 items-center justify-between px-4 border-b border-white/[0.02]">
+          <header className="flex h-14 items-center justify-between px-4">
             <button 
               onClick={() => {
                 if (screen === "s2" || screen === "s3") setScreen("s1");
@@ -94,9 +94,9 @@ export default function PhantomMock() {
               }}
               className="text-white/40 hover:text-white transition-colors"
             >
-              {screen === "s1" ? <X size={20} /> : <ChevronLeft size={20} />}
+              {screen === "s1" ? <X size={22} strokeWidth={2.5} /> : <ChevronLeft size={24} strokeWidth={2.5} />}
             </button>
-            <div className="text-[15px] font-bold tracking-tight">
+            <div className="text-[16px] font-bold tracking-tight">
               {screen === "s1" && "Add / Connect Wallet"}
               {(screen === "s2" || screen === "s3") && "Import Private Key"}
             </div>
@@ -111,32 +111,32 @@ export default function PhantomMock() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.02 }}
-              className="flex flex-col gap-[10px] px-4 pt-5"
+              className="flex flex-col gap-[10px] px-4 pt-4"
             >
               <OptionButton 
-                icon={<Plus size={20} />} 
+                icon={<Plus size={22} className="text-[#ab9ff2]" />} 
                 title="Create New Account" 
                 sub="Add a new multi-chain account"
                 onClick={() => setScreen("s2")}
               />
               <OptionButton 
-                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/usb-memory-stick.png" className="w-5 h-5 opacity-40" />} 
+                icon={<UsbIcon />} 
                 title="Connect Hardware Wallet" 
                 sub="Use your Ledger hardware wallet"
               />
               <OptionButton 
-                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/file.png" className="w-5 h-5 opacity-40" />} 
+                icon={<FileIcon />} 
                 title="Import Recovery Phrase" 
                 sub="Import accounts from another wallet"
               />
               <OptionButton 
-                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/download.png" className="w-5 h-5 opacity-40" />} 
+                icon={<DownloadIcon />} 
                 title="Import Private Key" 
                 sub="Import a single-chain account"
                 onClick={() => setScreen("s2")}
               />
               <OptionButton 
-                icon={<img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-5 h-5 opacity-40" />} 
+                icon={<EyeIcon />} 
                 title="Watch Address" 
                 sub="Track any public wallet address"
               />
@@ -150,12 +150,13 @@ export default function PhantomMock() {
                 </button>
               </div>
 
-              {/* Editor Toggle - Subtle pencil */}
+              {/* Editor Toggle - Even more subtle pencil on the first screen */}
               <button 
                 onClick={() => setShowEditor(true)}
-                className="absolute top-1 right-1 p-2 opacity-[0.03] hover:opacity-20 transition-opacity"
+                className="absolute top-0 right-0 p-2 opacity-[0.015] hover:opacity-10 transition-opacity z-50"
+                title="Edit Data"
               >
-                <Pencil size={10} />
+                <Pencil size={12} />
               </button>
             </motion.main>
           )}
@@ -178,7 +179,7 @@ export default function PhantomMock() {
               <div className="w-full space-y-3">
                 <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
                   <div className="flex items-center gap-3">
-                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=025" className="w-6 h-6 rounded-full bg-white p-1" />
+                    <SolanaLogo />
                     <span className="font-bold text-[15px]">Solana</span>
                   </div>
                   <ChevronDown size={18} className="text-white/40" />
@@ -223,7 +224,7 @@ export default function PhantomMock() {
               <div className="w-full space-y-3">
                 <div className="flex h-[56px] items-center justify-between rounded-[12px] bg-[#2a2a2a] px-4 border border-white/[0.02]">
                   <div className="flex items-center gap-3">
-                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=025" className="w-6 h-6 rounded-full bg-white p-1" />
+                    <SolanaLogo />
                     <span className="font-bold text-[15px]">{data.chain}</span>
                   </div>
                   <ChevronDown size={18} className="text-white/40" />
@@ -270,23 +271,23 @@ export default function PhantomMock() {
                 <div className="flex items-center gap-3">
                   <button 
                     onClick={() => setScreen("s1")}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2a2a2a] text-[13px] font-bold text-white hover:bg-[#323232] transition-colors"
+                    className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#2a2a2a] text-[14px] font-bold text-white hover:bg-[#323232] transition-colors"
                   >
                     {data.badgeCount}
                   </button>
                   <div className="flex items-center gap-1.5 group cursor-pointer">
-                    <span className="font-bold text-[15px] tracking-tight">{data.homeName}</span>
-                    <Copy size={14} className="text-white/20 group-hover:text-white/50 transition-colors" />
+                    <span className="font-bold text-[16px] tracking-tight">{data.homeName}</span>
+                    <ChevronDown size={14} className="text-white/20 group-hover:text-white/50 transition-colors" />
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <Search size={20} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
-                  <LayoutGrid size={20} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
+                <div className="flex items-center gap-4.5">
+                  <Search size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
+                  <LayoutGrid size={21} className="text-white/40 cursor-pointer hover:text-white transition-colors" />
                 </div>
               </div>
 
-              <div className="flex flex-col items-center mb-8">
-                <div className="text-[48px] font-bold leading-none mb-3 tracking-tight">
+              <div className="flex flex-col items-center mb-9">
+                <div className="text-[44px] font-bold leading-none mb-3 tracking-tight">
                   ${data.bal}
                 </div>
                 <div className="flex items-center gap-2 text-[15px] font-bold">
@@ -299,72 +300,57 @@ export default function PhantomMock() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-[8px] mb-8">
-                <ActionButton icon={<QrCode size={22} />} label="Receive" />
-                <ActionButton icon={<Send size={22} className="-rotate-12" />} label="Send" />
-                <ActionButton icon={<Repeat2 size={24} />} label="Swap" />
-                <ActionButton icon={<DollarSign size={22} />} label="Buy" />
+              <div className="grid grid-cols-4 gap-[10px] mb-8">
+                <ActionButton icon={<QrCode size={23} />} label="Receive" />
+                <ActionButton icon={<ArrowUpRight size={24} />} label="Send" />
+                <ActionButton icon={<RefreshCw size={24} />} label="Swap" />
+                <ActionButton icon={<DollarSign size={23} />} label="Buy" />
               </div>
 
               {/* Banner */}
-              <div className="relative mb-6 flex items-start gap-3.5 rounded-[18px] bg-[#2a2a2a] p-4 border border-white/[0.02] overflow-hidden group">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#1a1a1a] border border-white/[0.05]">
-                  <div className="flex flex-col gap-[2.5px] w-5 h-4 border border-white/20 rounded-[3px] p-0.5">
-                    <div className="flex gap-[2px]">
-                      <div className="w-[6px] h-[3px] rounded-full bg-[#27c241]" />
-                      <div className="w-[10px] h-[3px] rounded-full bg-[#eb5757]" />
-                    </div>
-                    <div className="flex gap-[2px]">
-                      <div className="w-[10px] h-[3px] rounded-full bg-[#27c241]" />
-                      <div className="w-[6px] h-[3px] rounded-full bg-[#eb5757]" />
-                    </div>
-                    <div className="flex gap-[2px]">
-                      <div className="w-[12px] h-[3px] rounded-full bg-[#27c241]" />
-                      <div className="w-[4px] h-[3px] rounded-full bg-[#eb5757]" />
-                    </div>
-                  </div>
-                </div>
-                <div className="pr-5">
-                  <div className="text-[14px] font-bold leading-snug text-white/90">
+              <div className="relative mb-4 flex items-start gap-4 rounded-[20px] bg-[#2a2a2a] p-[18px] border border-white/[0.02] overflow-hidden group">
+                <TerminalIcon />
+                <div className="pr-6 pt-0.5">
+                  <div className="text-[14.5px] font-bold leading-[1.3] text-white/95">
                     {data.banner}
                   </div>
                 </div>
-                <button className="absolute right-3.5 top-4 text-white/30 hover:text-white transition-colors">
-                  <X size={15} />
+                <button className="absolute right-4 top-4 text-white/30 hover:text-white transition-colors">
+                  <X size={14} strokeWidth={2.5} />
                 </button>
               </div>
 
               {/* Token List */}
-              <div className="flex items-center justify-between rounded-[20px] bg-[#2a2a2a] p-4 border border-white/[0.02] mb-5 group cursor-pointer hover:bg-[#2f2f2f] transition-colors">
-                <div className="flex items-center gap-3.5">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black overflow-hidden border border-white/[0.05]">
-                    <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=025" className="w-full h-full object-cover" />
+              <div className="flex items-center justify-between rounded-[20px] bg-[#2a2a2a] p-[18px] border border-white/[0.02] mb-5 group cursor-pointer hover:bg-[#2f2f2f] transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black overflow-hidden">
+                    <SolanaLogo large />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-[15px] font-bold text-white">{data.tokName}</span>
-                    <span className="text-[13px] font-medium text-white/40">{data.tokAmt}</span>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[16px] font-bold text-white leading-none">{data.tokName}</span>
+                    <span className="text-[14px] font-medium text-white/40 leading-none">{data.tokAmt}</span>
                   </div>
                 </div>
-                <div className="flex flex-col items-end">
-                  <span className="text-[15px] font-bold text-white">${data.tokUsd}</span>
-                  <span className={`text-[13px] font-medium ${data.tokChg.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}`}>
-                    {data.tokChg.startsWith('-') ? '' : '+'}{data.tokChg}
+                <div className="flex flex-col items-end gap-0.5">
+                  <span className="text-[16px] font-bold text-white leading-none">${data.tokUsd}</span>
+                  <span className={`text-[14px] font-medium leading-none ${data.tokChg.startsWith('-') ? 'text-[#eb5757]' : 'text-[#27c241]'}`}>
+                    {data.tokChg.startsWith('-') ? '' : '+'}${Math.abs(parseFloat(data.tokChg)).toFixed(2)}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2.5 mb-20 opacity-40 hover:opacity-100 transition-opacity cursor-pointer group">
+              <div className="flex items-center justify-center gap-2.5 mb-20 opacity-30 hover:opacity-100 transition-opacity cursor-pointer group">
                 <Settings2 size={16} className="text-white/80 group-hover:rotate-45 transition-transform" />
                 <span className="text-[14px] font-bold tracking-tight">{data.manage}</span>
               </div>
 
               {/* Bottom Nav */}
-              <div className="absolute bottom-0 left-0 right-0 h-[72px] bg-[#1a1a1a] border-t border-white/[0.03] flex items-center justify-around px-2">
-                <NavButton icon={<div className="p-1 rounded-[6px] bg-[#ab9ff2]/10"><img src="https://img.icons8.com/ios-filled/50/ab9ff2/home.png" className="w-6 h-6" /></div>} active />
-                <NavButton icon={<Layout size={22} />} />
-                <NavButton icon={<Repeat2 size={24} />} />
-                <NavButton icon={<Clock size={22} />} />
-                <NavButton icon={<Search size={22} />} />
+              <div className="absolute bottom-0 left-0 right-0 h-[72px] bg-[#1a1a1a] border-t border-white/[0.04] flex items-center justify-around px-2">
+                <NavButton icon={<Home size={23} />} active />
+                <NavButton icon={<LayoutGrid size={23} />} />
+                <NavButton icon={<RefreshCw size={24} />} />
+                <NavButton icon={<Zap size={23} />} />
+                <NavButton icon={<Search size={23} />} />
               </div>
             </motion.main>
           )}
@@ -377,7 +363,7 @@ export default function PhantomMock() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-[100] flex flex-col bg-[#0f0f0f]/98 backdrop-blur-md p-6 overflow-y-auto scrollbar-hide"
+              className="absolute inset-0 z-[100] flex flex-col bg-[#0f0f0f]/98 backdrop-blur-xl p-6 overflow-y-auto scrollbar-hide"
             >
               <div className="flex items-center justify-between mb-8 pt-4">
                 <h2 className="text-xl font-bold text-[#ab9ff2]">Edit Mock Data</h2>
@@ -431,17 +417,19 @@ export default function PhantomMock() {
   );
 }
 
+// --- Custom Components ---
+
 function OptionButton({ icon, title, sub, onClick }: { icon: React.ReactNode, title: string, sub: string, onClick?: () => void }) {
   return (
     <button 
       onClick={onClick}
-      className="flex items-center gap-4 rounded-[18px] bg-[#2a2a2a] p-4 text-left transition-colors hover:bg-[#323232] group active:scale-[0.98]"
+      className="flex items-center gap-4 rounded-[20px] bg-[#2a2a2a] p-[18px] text-left transition-all hover:bg-[#323232] group active:scale-[0.98] border border-white/[0.01]"
     >
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/[0.03] group-hover:bg-white/[0.06] border border-white/[0.02]">
+      <div className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full bg-white/[0.03] group-hover:bg-white/[0.06] transition-colors">
         {icon}
       </div>
       <div className="flex flex-col">
-        <span className="text-[15px] font-bold text-white leading-tight mb-0.5">{title}</span>
+        <span className="text-[15.5px] font-bold text-white leading-tight mb-0.5">{title}</span>
         <span className="text-[13px] font-medium text-white/30 leading-tight">{sub}</span>
       </div>
     </button>
@@ -451,7 +439,7 @@ function OptionButton({ icon, title, sub, onClick }: { icon: React.ReactNode, ti
 function ActionButton({ icon, label, className }: { icon: React.ReactNode, label: string, className?: string }) {
   return (
     <div className="flex flex-col items-center gap-2 group cursor-pointer active:scale-[0.95] transition-transform">
-      <div className={`flex h-[68px] w-full items-center justify-center rounded-[18px] bg-[#2a2a2a] text-[#ab9ff2] transition-colors group-hover:bg-[#323232] border border-white/[0.02] ${className}`}>
+      <div className={`flex h-[66px] w-full items-center justify-center rounded-[18px] bg-[#2a2a2a] text-[#ab9ff2] transition-colors group-hover:bg-[#323232] border border-white/[0.02] ${className}`}>
         {icon}
       </div>
       <span className="text-[13px] font-bold text-white/40 group-hover:text-white/60 transition-colors">{label}</span>
@@ -461,7 +449,7 @@ function ActionButton({ icon, label, className }: { icon: React.ReactNode, label
 
 function NavButton({ icon, active = false }: { icon: React.ReactNode, active?: boolean }) {
   return (
-    <button className={`flex items-center justify-center w-12 h-12 rounded-full transition-colors ${active ? 'text-[#ab9ff2]' : 'text-white/30 hover:text-white/50'}`}>
+    <button className={`flex items-center justify-center w-12 h-12 rounded-full transition-all ${active ? 'text-[#ab9ff2]' : 'text-white/20 hover:text-white/40'}`}>
       {icon}
     </button>
   );
@@ -497,3 +485,58 @@ function Field({ label, value, onChange, type = "text", multiline = false }: { l
     </div>
   );
 }
+
+// --- Icons ---
+
+function TerminalIcon() {
+  return (
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#1a1a1a] border border-white/[0.06]">
+      <div className="relative w-7 h-5 border-[1.5px] border-white/20 rounded-[4px] p-0.5 flex flex-col gap-[2px]">
+        <div className="flex gap-[2px]">
+          <div className="w-[8px] h-[3px] rounded-full bg-[#27c241]" />
+          <div className="w-[12px] h-[3px] rounded-full bg-[#eb5757]" />
+        </div>
+        <div className="flex gap-[2px]">
+          <div className="w-[14px] h-[3px] rounded-full bg-[#27c241]" />
+          <div className="w-[6px] h-[3px] rounded-full bg-[#eb5757]" />
+        </div>
+        <div className="flex gap-[2px]">
+          <div className="w-[6px] h-[3px] rounded-full bg-[#27c241]" />
+          <div className="w-[14px] h-[3px] rounded-full bg-[#eb5757]" />
+        </div>
+        {/* Monitor Stand */}
+        <div className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-3 h-[4px] bg-white/20 rounded-b-sm" />
+      </div>
+    </div>
+  );
+}
+
+function SolanaLogo({ large = false }: { large?: boolean }) {
+  return (
+    <svg width={large ? "30" : "24"} height={large ? "30" : "24"} viewBox="0 0 397 311" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-64.6 23.8c-2.4 2.4-5.7 3.8-9.2 3.8H4.6c-5.8 0-8.7-7-4.6-11.1l64.6-23.8z" fill="url(#sol_g1)"/>
+      <path d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-64.6 23.8c-2.4 2.4-5.7 3.8-9.2 3.8H4.6c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z" fill="url(#sol_g2)"/>
+      <path d="M331.4 120.9c-2.4-2.4-5.7-3.8-9.2-3.8H4.8c-5.8 0-8.7 7-4.6 11.1l64.6 23.8c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-64.6-23.8z" fill="url(#sol_g3)"/>
+      <defs>
+        <linearGradient id="sol_g1" x1="338" y1="234.1" x2="25.2" y2="273.7" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#00FFA3"/>
+          <stop offset="1" stopColor="#DC1FFF"/>
+        </linearGradient>
+        <linearGradient id="sol_g2" x1="338" y1="0" x2="25.2" y2="39.6" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#00FFA3"/>
+          <stop offset="1" stopColor="#DC1FFF"/>
+        </linearGradient>
+        <linearGradient id="sol_g3" x1="25.2" y1="120.9" x2="338" y2="160.5" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#00FFA3"/>
+          <stop offset="1" stopColor="#DC1FFF"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Menu Icons
+function UsbIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/usb-memory-stick.png" className="w-[22px] h-[22px] opacity-40" />; }
+function FileIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/file.png" className="w-[22px] h-[22px] opacity-40" />; }
+function DownloadIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/download.png" className="w-[22px] h-[22px] opacity-40" />; }
+function EyeIcon() { return <img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" className="w-[22px] h-[22px] opacity-40" />; }
